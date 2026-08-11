@@ -45,11 +45,4 @@ The main backend request flow can be represented as:
 
 **Frontend → Amazon API Gateway → AWS Lambda → Amazon DynamoDB**
 
-<!-- FIGURE 5.2.2-2:
-Use the existing request-flow diagram showing
-Browser/Phone → API Gateway → Lambda → DynamoDB.
--->
-
-![CloudMenu Request Flow](/images/5-Workshop/5.2/request-flow.png)
-
 Preparing both the frontend and backend source code before creating AWS resources helps ensure a smoother deployment process in the following sections.

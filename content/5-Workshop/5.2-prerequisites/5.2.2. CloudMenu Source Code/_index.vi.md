@@ -46,11 +46,4 @@ Luồng xử lý backend có thể được mô tả như sau:
 
 **Frontend → Amazon API Gateway → AWS Lambda → Amazon DynamoDB**
 
-<!-- HÌNH 5.2.2-2:
-Có thể sử dụng sơ đồ "Luồng request ứng dụng chạy thật"
-mà em đã gửi trước đó.
-Sơ đồ có Browser/Phone → API Gateway → Lambda → DynamoDB. -->
-
-![CloudMenu Request Flow](/images/5-Workshop/5.2/request-flow.png)
-
 Việc chuẩn bị đầy đủ mã nguồn frontend và backend trước khi tạo tài nguyên AWS giúp quá trình triển khai ở các bước tiếp theo được thực hiện thuận lợi hơn.
