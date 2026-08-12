@@ -102,7 +102,6 @@ ozmr-s3-demo-bucket
 
 Sau khi đảm bảo bucket không còn chứa dữ liệu cần giữ lại, có thể tiến hành xóa bucket.
 
-> **Lưu ý:** Cần kiểm tra kỹ nội dung của bucket trước khi xóa để tránh mất các tệp vẫn còn cần thiết cho quá trình demo hoặc đánh giá.
 
 ---
 
@@ -225,8 +224,6 @@ Nếu dữ liệu không còn cần thiết, có thể tiến hành xóa bảng:
 CloudMenuOrders
 ```
 
-> **Lưu ý:** Việc xóa bảng `CloudMenuOrders` sẽ xóa dữ liệu đơn hàng được lưu trong bảng. Nếu cần giữ lại dữ liệu, cần thực hiện sao lưu hoặc xuất dữ liệu trước khi xóa.
-
 ---
 
 ### 6. Kiểm tra IAM Role và Policy
@@ -268,8 +265,6 @@ AWS Management Console
 Kiểm tra các Policy không còn được sử dụng.
 
 Nếu Role hoặc Policy không còn được gắn với bất kỳ tài nguyên nào, có thể tiến hành dọn dẹp chúng.
-
-> **Lưu ý:** Không nên xóa IAM Role hoặc Policy nếu chúng vẫn đang được sử dụng bởi tài nguyên AWS khác. Cần kiểm tra dependency trước khi thực hiện thao tác xóa.
 
 ---
 

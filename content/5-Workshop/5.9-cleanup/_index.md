@@ -19,8 +19,6 @@ The main AWS services used in this Workshop include:
 - Amazon DynamoDB
 - AWS Identity and Access Management (IAM)
 
-> **Note:** In the current Workshop environment, CloudMenu resources are still maintained for testing, demonstration, and evaluation purposes. The cleanup procedure below should be performed after the Workshop has been completed and the system is no longer required.
-
 ---
 
 ### 1. Clean Up Amazon CloudFront
@@ -225,8 +223,6 @@ If the data is no longer required, delete the table:
 CloudMenuOrders
 ```
 
-> **Note:** Deleting the `CloudMenuOrders` table will remove the order data stored in the table. If the data needs to be retained, it should be backed up or exported before deletion.
-
 ---
 
 ### 6. Review IAM Roles and Policies
@@ -269,7 +265,6 @@ Review the Policies that are no longer required.
 
 If a Role or Policy is no longer attached to or used by any AWS resource, it can be removed.
 
-> **Note:** Do not delete an IAM Role or Policy if it is still being used by another AWS resource. Dependencies should be verified before deletion.
 
 ---
 
