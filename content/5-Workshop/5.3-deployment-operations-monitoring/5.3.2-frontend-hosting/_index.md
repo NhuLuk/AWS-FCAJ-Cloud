@@ -152,12 +152,12 @@ After the frontend files have been uploaded to Amazon S3 and CloudFront is servi
 
 Example:
 
-https://d3be9t7i3323e7.cloudfront.net/index.html?table=01
+https://d3be9t7i3323e7.cloudfront.net/index.html?table=02
 
 The query parameter:
 
 ```text
-?table=01
+?table=02
 ```
 
 is used to pass the table identifier to the Customer Interface when the application is opened through a corresponding QR Code or URL.

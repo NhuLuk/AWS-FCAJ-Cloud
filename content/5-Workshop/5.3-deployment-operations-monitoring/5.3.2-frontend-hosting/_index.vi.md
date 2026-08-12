@@ -152,12 +152,12 @@ Sau khi các frontend files được upload lên Amazon S3 và CloudFront đã p
 
 Ví dụ:
 
-https://d3be9t7i3323e7.cloudfront.net/index.html?table=01
+https://d3be9t7i3323e7.cloudfront.net/index.html?table=02
 
 Query parameter:
 
 ```text
-?table=01
+?table=02
 ```
 
 được sử dụng để truyền thông tin bàn vào Customer Interface trong quá trình truy cập thông qua QR Code hoặc URL tương ứng.
