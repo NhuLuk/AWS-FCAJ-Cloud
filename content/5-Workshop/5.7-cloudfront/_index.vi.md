@@ -30,6 +30,8 @@ Amazon S3
 index.html
 ```
 
+---
+
 ### Kiểm tra CloudFront Distribution
 
 CloudFront Distribution được sử dụng cho ứng dụng có tên:
@@ -46,7 +48,9 @@ d3be9t7i3323e7.cloudfront.net
 
 Domain này được sử dụng làm địa chỉ truy cập frontend của ứng dụng CloudMenu.
 
-![CloudFront Distribution](images/cloudfront-distribution.png)
+![CloudFront Distribution](/images/5-Workshop/5.7/cloudfront-distribution.png)
+
+*Hình 1. CloudFront Distribution của hệ thống CloudMenu.*
 
 Thông tin cấu hình chính của Distribution:
 
@@ -59,6 +63,8 @@ Thông tin cấu hình chính của Distribution:
 | Standard logging | Off |
 | Custom domain | Chưa cấu hình |
 
+---
+
 ### Cấu hình Default Root Object
 
 Trong phần **General → Settings**, cấu hình:
@@ -67,7 +73,9 @@ Trong phần **General → Settings**, cấu hình:
 Default root object: index.html
 ```
 
-![CloudFront General Settings](images/cloudfront-general-settings.png)
+![CloudFront General Settings](/images/5-Workshop/5.7/cloudfront-general-settings.png)
+
+*Hình 2. Cấu hình General Settings và Default Root Object của CloudFront.*
 
 `index.html` được thiết lập làm Default Root Object để khi người dùng truy cập trực tiếp CloudFront domain mà không chỉ định tên tệp, CloudFront sẽ tự động yêu cầu tệp `index.html` từ origin.
 
@@ -85,6 +93,8 @@ index.html
 
 Điều này cho phép người dùng truy cập frontend CloudMenu bằng domain chính của CloudFront mà không cần nhập trực tiếp `/index.html`.
 
+---
+
 ### Cấu hình Amazon S3 làm Origin
 
 Trong tab **Origins**, Amazon S3 bucket được cấu hình làm origin cho CloudFront Distribution.
@@ -101,7 +111,9 @@ Origin Path:
 /frontend
 ```
 
-![CloudFront Origin](images/cloudfront-origin.png)
+![CloudFront Origin](/images/5-Workshop/5.7/cloudfront-origin.png)
+
+*Hình 3. Amazon S3 được cấu hình làm Origin của CloudFront Distribution.*
 
 Việc cấu hình Origin Path là `/frontend` cho phép CloudFront lấy các tệp frontend từ thư mục:
 
@@ -109,7 +121,7 @@ Việc cấu hình Origin Path là `/frontend` cho phép CloudFront lấy các t
 s3://ozmr-s3-demo-bucket/frontend/
 ```
 
-Thay vì truy cập các object ở root của bucket.
+thay vì truy cập các object ở root của bucket.
 
 Do đó, khi CloudFront yêu cầu:
 
@@ -125,9 +137,11 @@ request thực tế sẽ được chuyển đến object:
 
 trong S3 bucket.
 
+---
+
 ### Bảo vệ S3 Origin
 
-S3 bucket được cấu hình **Block Public Access**, do đó người dùng không truy cập trực tiếp các frontend object trong bucket thông qua public S3 access.
+S3 bucket được cấu hình **Block Public Access**, do đó người dùng không thể truy cập trực tiếp các frontend object trong bucket thông qua public S3 access.
 
 CloudFront được cấu hình quyền truy cập origin để có thể đọc các object cần thiết từ S3.
 
@@ -154,6 +168,8 @@ Direct public access to S3
 
 Cách triển khai này giúp S3 tiếp tục được giữ private trong khi frontend vẫn có thể được phân phối thông qua CloudFront.
 
+---
+
 ### Cấu hình Behavior
 
 Trong tab **Behaviors**, Distribution sử dụng default behavior:
@@ -174,7 +190,9 @@ Cache Policy:
 Managed-CachingOptimized
 ```
 
-![CloudFront Behavior](images/cloudfront-behavior.png)
+![CloudFront Behavior](/images/5-Workshop/5.7/cloudfront-behavior.png)
+
+*Hình 4. Cấu hình Behavior của CloudFront Distribution.*
 
 Với cấu hình **Redirect HTTP to HTTPS**, các request sử dụng HTTP sẽ được chuyển hướng sang HTTPS trước khi nội dung được phân phối.
 
@@ -186,7 +204,9 @@ http://d3be9t7i3323e7.cloudfront.net
 
 sẽ được chuyển hướng sang kết nối HTTPS.
 
-Cache policy `Managed-CachingOptimized` được sử dụng để CloudFront cache các nội dung phù hợp tại edge locations, giúp hạn chế số request phải gửi lại đến S3 origin.
+Cache Policy `Managed-CachingOptimized` được sử dụng để CloudFront cache các nội dung phù hợp tại edge locations, giúp hạn chế số request phải gửi lại đến S3 origin.
+
+---
 
 ### Luồng phân phối frontend
 
@@ -221,7 +241,11 @@ CloudFront
 Browser
 ```
 
-Khi nội dung đã tồn tại trong CloudFront cache, CloudFront có thể trả response trực tiếp cho người dùng. Nếu nội dung chưa có trong cache, CloudFront lấy object từ S3 origin và phân phối lại cho client.
+Khi nội dung đã tồn tại trong CloudFront cache, CloudFront có thể trả response trực tiếp cho người dùng.
+
+Nếu nội dung chưa có trong cache, CloudFront lấy object từ S3 origin, phân phối nội dung đến client và có thể lưu nội dung phù hợp tại edge location để phục vụ các request tiếp theo.
+
+---
 
 ### Kết quả
 
@@ -242,4 +266,6 @@ CloudMenu Frontend
 
 CloudFront cung cấp HTTPS endpoint cho frontend, trong khi Amazon S3 tiếp tục đóng vai trò lưu trữ các static assets của ứng dụng.
 
-Việc kiểm thử truy cập website thông qua CloudFront domain và kiểm tra kết nối giữa frontend với backend API sẽ được thực hiện trong phần **5.8. Testing**.
+Thông qua CloudFront, người dùng có thể truy cập giao diện CloudMenu bằng Distribution Domain Name mà không cần truy cập trực tiếp vào S3 bucket.
+
+Việc kiểm thử truy cập website thông qua CloudFront domain và kiểm tra kết nối giữa frontend với backend API sẽ được thực hiện trong phần **5.8. Kiểm thử hệ thống**.

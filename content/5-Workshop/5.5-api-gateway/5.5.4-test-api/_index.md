@@ -1,26 +1,26 @@
 ---
-title: "Test API"
+title: "API Testing"
 date: 2026-06-22
 weight: 4
 chapter: false
 pre: "<b>5.5.4. </b>"
 ---
 
-## 5.5.4. Test API
+## 5.5.4. API Testing
 
-After configuring the Routes and Lambda Integrations, the APIs are tested to verify that API Gateway correctly forwards requests to the appropriate Lambda Functions and that the system processes the requests successfully.
+After completing the Route configuration and Lambda Integrations, the APIs are tested to verify that Amazon API Gateway can forward requests to the correct Lambda Functions and that the backend functions of CloudMenu work properly.
 
-CloudMenu provides three main APIs that are tested using Postman:
+In CloudMenu, three main APIs are tested using Postman:
 
 | Method | Endpoint | Function |
-|---|---|---|
-| POST | `/order` | Create a new order |
-| GET | `/orders` | Retrieve the order list |
-| PUT | `/orders/{orderId}` | Update an order status |
+| :---: | :--- | :--- |
+| `POST` | `/order` | Create a new order |
+| `GET` | `/orders` | Retrieve the order list |
+| `PUT` | `/orders/{orderId}` | Update the order status |
 
 ---
 
-### 1. Test POST /order
+### 1. Testing POST /order
 
 The `POST /order` API is used to create a new order.
 
@@ -30,7 +30,7 @@ In Postman, select the **POST** method and enter the endpoint:
 https://<api-id>.execute-api.us-east-1.amazonaws.com/order
 ```
 
-In the **Body** section, select **raw → JSON** and enter the order information:
+In the **Body** section, select **raw → JSON** and enter the order data:
 
 ```json
 {
@@ -49,21 +49,23 @@ In the **Body** section, select **raw → JSON** and enter the order information
 
 Click **Send** to submit the request.
 
-API Gateway forwards the request to the `createOrder` Lambda Function. The Lambda Function processes the request and stores the order in the `CloudMenuOrders` DynamoDB table.
+Amazon API Gateway forwards the request to the `createOrder` Lambda Function. The Lambda Function processes the request and stores the new order in the `CloudMenuOrders` Amazon DynamoDB table.
 
-The API returns:
+The API returns the following HTTP status:
 
 ```text
 200 OK
 ```
 
-This confirms that the order creation API is working successfully.
+This result confirms that the order creation API is working successfully.
 
-![Test POST API](images/test-post-order.png)
+![Test POST API](/images/5-Workshop/5.5/test-post-order.png)
+
+*Figure 1. Testing the POST /order API using Postman.*
 
 ---
 
-### 2. Test GET /orders
+### 2. Testing GET /orders
 
 The `GET /orders` API is used to retrieve the list of orders stored in the system.
 
@@ -73,11 +75,11 @@ In Postman, select the **GET** method and enter the endpoint:
 https://<api-id>.execute-api.us-east-1.amazonaws.com/orders
 ```
 
-API Gateway forwards the request to the `getOrders` Lambda Function. The Lambda Function retrieves the order data from the `CloudMenuOrders` DynamoDB table and returns the result to the client.
-
-No request body is required for the GET request.
+A GET request does not require a Request Body.
 
 Click **Send** to submit the request.
+
+Amazon API Gateway forwards the request to the `getOrders` Lambda Function. The Lambda Function retrieves the order data from the `CloudMenuOrders` DynamoDB table and returns the order list to the client.
 
 The API returns:
 
@@ -85,19 +87,21 @@ The API returns:
 200 OK
 ```
 
-The response contains the orders currently stored in the system.
+The response contains information about the orders currently stored in the system.
 
-![Test GET API](images/test-get-orders.png)
+![Test GET API](/images/5-Workshop/5.5/test-get-orders.png)
+
+*Figure 2. Testing the GET /orders API using Postman.*
 
 ---
 
-### 3. Test PUT /orders/{orderId}
+### 3. Testing PUT /orders/{orderId}
 
 The `PUT /orders/{orderId}` API is used to update the status of an existing order.
 
-In this test, the order with the `orderId` `ORD003` is updated.
+In this test, the order with the `orderId` value `ORD003` is used.
 
-Select the **PUT** method and use the following endpoint:
+In Postman, select the **PUT** method and enter the endpoint:
 
 ```text
 https://<api-id>.execute-api.us-east-1.amazonaws.com/orders/ORD003
@@ -113,9 +117,9 @@ In the **Body** section, select **raw → JSON** and enter:
 
 Click **Send** to submit the request.
 
-API Gateway extracts `ORD003` from the `{orderId}` path parameter and forwards the request to the `updateOrderStatus` Lambda Function.
+Amazon API Gateway extracts the `ORD003` value from the `{orderId}` Path Parameter and forwards the request to the `updateOrderStatus` Lambda Function.
 
-The Lambda Function updates the corresponding order in the `CloudMenuOrders` DynamoDB table.
+The Lambda Function identifies the corresponding order in the `CloudMenuOrders` DynamoDB table and updates its status.
 
 The API returns:
 
@@ -123,17 +127,19 @@ The API returns:
 200 OK
 ```
 
-This confirms that the order status was updated successfully.
+This result confirms that the order status has been updated successfully.
 
-![Test PUT API](images/test-put-order.png)
+![Test PUT API](/images/5-Workshop/5.5/test-put-order.png)
+
+*Figure 3. Testing the PUT /orders/{orderId} API using Postman.*
 
 ---
 
-### Test Results
+### Testing Results
 
-All three APIs returned an HTTP `200 OK` response, confirming that the integration between API Gateway, AWS Lambda, and Amazon DynamoDB is working successfully.
+All three APIs return the HTTP status `200 OK`, confirming that the integration between Amazon API Gateway, AWS Lambda, and Amazon DynamoDB is working successfully.
 
-The request flow can be summarized as:
+The request flow can be summarized as follows:
 
 ```text
 Postman
@@ -147,10 +153,18 @@ Amazon DynamoDB
 Response
 ```
 
-The APIs currently support the core CloudMenu operations:
+The API testing results are summarized below:
 
-- Create a new order.
-- Retrieve the order list.
-- Update an order status.
+| API | Lambda Function | Result |
+| :--- | :--- | :---: |
+| `POST /order` | `createOrder` | `200 OK` |
+| `GET /orders` | `getOrders` | `200 OK` |
+| `PUT /orders/{orderId}` | `updateOrderStatus` | `200 OK` |
 
-After verifying that all APIs work correctly, the backend is ready to be integrated with the CloudMenu user interface.
+The APIs now support the main backend functions of CloudMenu:
+
+- Creating a new order.
+- Retrieving the order list.
+- Updating the status of an existing order.
+
+After verifying that all APIs work correctly, the CloudMenu backend is ready to be integrated with the frontend application.

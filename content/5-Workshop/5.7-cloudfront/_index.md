@@ -1,18 +1,18 @@
 ---
-title: "Deploy Amazon CloudFront"
+title: "Deploying Amazon CloudFront"
 date: 2026-06-22
 weight: 7
 chapter: false
 pre: "<b>5.7. </b>"
 ---
 
-## 5.7. Deploy Amazon CloudFront
+## 5.7. Deploying Amazon CloudFront
 
 After uploading the frontend source files to Amazon S3, the next step is to configure **Amazon CloudFront** to distribute the CloudMenu frontend to users.
 
-In this architecture, Amazon S3 stores the static frontend files, while Amazon CloudFront acts as the Content Delivery Network (CDN), receiving user requests and delivering content from the S3 origin.
+In this architecture, Amazon S3 stores the static frontend files, while Amazon CloudFront acts as a Content Delivery Network (CDN) that receives user requests and distributes content from the S3 origin.
 
-The frontend delivery flow is implemented as follows:
+The frontend access flow is as follows:
 
 ```text
 User
@@ -30,25 +30,29 @@ Amazon S3
 index.html
 ```
 
-### Verify the CloudFront Distribution
+---
 
-The CloudFront Distribution used by the application is named:
+### Checking the CloudFront Distribution
+
+The CloudFront Distribution used for the application is named:
 
 ```text
 CloudMenu
 ```
 
-After the Distribution was created, CloudFront provided the following Distribution Domain Name:
+After the Distribution is created successfully, CloudFront provides the following Distribution Domain Name:
 
 ```text
 d3be9t7i3323e7.cloudfront.net
 ```
 
-This domain is used as the frontend access endpoint for the CloudMenu application.
+This domain is used to access the CloudMenu frontend.
 
-![CloudFront Distribution](images/cloudfront-distribution.png)
+![CloudFront Distribution](/images/5-Workshop/5.7/cloudfront-distribution.png)
 
-The main Distribution settings are:
+*Figure 1. CloudFront Distribution of the CloudMenu system.*
+
+The main Distribution configuration is summarized below:
 
 | Configuration | Value |
 |---|---|
@@ -59,17 +63,23 @@ The main Distribution settings are:
 | Standard logging | Off |
 | Custom domain | Not configured |
 
-### Configure the Default Root Object
+---
 
-Under **General → Settings**, the following value is configured:
+### Configuring the Default Root Object
+
+In **General → Settings**, configure:
 
 ```text
 Default root object: index.html
 ```
 
-![CloudFront General Settings](images/cloudfront-general-settings.png)
+![CloudFront General Settings](/images/5-Workshop/5.7/cloudfront-general-settings.png)
 
-The `index.html` file is configured as the Default Root Object so that when users access the CloudFront domain without specifying a file name, CloudFront automatically requests `index.html` from the origin.
+*Figure 2. CloudFront General Settings and Default Root Object configuration.*
+
+The `index.html` file is configured as the Default Root Object.
+
+When a user accesses the CloudFront domain without specifying a file name, CloudFront automatically requests `index.html` from the configured origin.
 
 For example:
 
@@ -77,33 +87,37 @@ For example:
 https://d3be9t7i3323e7.cloudfront.net/
 ```
 
-CloudFront delivers the content corresponding to:
+CloudFront distributes the content corresponding to:
 
 ```text
 index.html
 ```
 
-This allows users to access the CloudMenu frontend through the main CloudFront domain without manually specifying `/index.html`.
+This configuration allows users to access the main CloudMenu frontend through the CloudFront domain without manually entering `/index.html`.
 
-### Configure Amazon S3 as the Origin
+---
+
+### Configuring Amazon S3 as the Origin
 
 In the **Origins** tab, the Amazon S3 bucket is configured as the origin of the CloudFront Distribution.
 
-The configured bucket is:
+The bucket used by CloudMenu is:
 
 ```text
 ozmr-s3-demo-bucket
 ```
 
-The Origin Path is:
+The Origin Path is configured as:
 
 ```text
 /frontend
 ```
 
-![CloudFront Origin](images/cloudfront-origin.png)
+![CloudFront Origin](/images/5-Workshop/5.7/cloudfront-origin.png)
 
-By setting the Origin Path to `/frontend`, CloudFront retrieves frontend files from:
+*Figure 3. Amazon S3 configured as the origin of the CloudFront Distribution.*
+
+Configuring the Origin Path as `/frontend` allows CloudFront to retrieve frontend files from:
 
 ```text
 s3://ozmr-s3-demo-bucket/frontend/
@@ -117,21 +131,21 @@ Therefore, when CloudFront requests:
 index.html
 ```
 
-the actual object is retrieved from:
+the actual object requested from the S3 origin is:
 
 ```text
 /frontend/index.html
 ```
 
-inside the S3 bucket.
+---
 
-### Protect the S3 Origin
+### Protecting the S3 Origin
 
-The S3 bucket is configured with **Block Public Access**, preventing users from directly accessing frontend objects through public S3 access.
+The S3 bucket has **Block Public Access** enabled. Therefore, users cannot directly access the frontend objects through public S3 access.
 
-CloudFront is configured with origin access permissions so that it can retrieve the required objects from the private S3 bucket.
+CloudFront is configured with the required permissions to retrieve objects from the S3 origin.
 
-The access flow follows this model:
+The access model is:
 
 ```text
 User
@@ -143,7 +157,7 @@ CloudFront
 Private S3 Bucket
 ```
 
-instead of:
+Instead of:
 
 ```text
 User
@@ -152,9 +166,11 @@ User
 Direct public access to S3
 ```
 
-This approach keeps the S3 bucket private while allowing the frontend content to be delivered through CloudFront.
+This approach keeps the S3 bucket private while allowing the CloudMenu frontend to be distributed through Amazon CloudFront.
 
-### Configure CloudFront Behavior
+---
+
+### Configuring the Behavior
 
 In the **Behaviors** tab, the Distribution uses the default behavior:
 
@@ -174,9 +190,11 @@ The Cache Policy is:
 Managed-CachingOptimized
 ```
 
-![CloudFront Behavior](images/cloudfront-behavior.png)
+![CloudFront Behavior](/images/5-Workshop/5.7/cloudfront-behavior.png)
 
-With **Redirect HTTP to HTTPS**, requests using HTTP are redirected to HTTPS before the content is delivered.
+*Figure 4. Behavior configuration of the CloudFront Distribution.*
+
+With **Redirect HTTP to HTTPS** enabled, requests using HTTP are redirected to HTTPS before the content is delivered.
 
 For example:
 
@@ -184,13 +202,15 @@ For example:
 http://d3be9t7i3323e7.cloudfront.net
 ```
 
-is redirected to a secure HTTPS connection.
+is redirected to an HTTPS connection.
 
-The `Managed-CachingOptimized` cache policy allows CloudFront to cache appropriate static content at edge locations, reducing the number of requests that need to reach the S3 origin.
+The `Managed-CachingOptimized` cache policy allows CloudFront to cache appropriate content at edge locations, reducing the number of requests that need to be sent back to the S3 origin.
 
-### Frontend Delivery Flow
+---
 
-After the configuration is completed, frontend content is delivered through the following flow:
+### Frontend Distribution Flow
+
+After the configuration is completed, the frontend distribution process works as follows:
 
 ```text
 Browser
@@ -221,11 +241,15 @@ CloudFront
 Browser
 ```
 
-If the requested content is already available in the CloudFront cache, CloudFront can return it directly to the user. Otherwise, CloudFront retrieves the object from the S3 origin and delivers it to the client.
+If the requested content is already available in the CloudFront cache, CloudFront can return it directly to the user.
+
+If the content is not available in the cache, CloudFront retrieves the object from the S3 origin, delivers it to the client, and may cache the appropriate content at the edge location for subsequent requests.
+
+---
 
 ### Result
 
-After this step, CloudMenu has completed the frontend distribution layer:
+After completing this step, the frontend distribution layer of CloudMenu is configured as follows:
 
 ```text
 User
@@ -240,6 +264,8 @@ Amazon S3
 CloudMenu Frontend
 ```
 
-CloudFront provides an HTTPS endpoint for the frontend, while Amazon S3 continues to store the application's static assets.
+Amazon CloudFront provides an HTTPS endpoint for the frontend, while Amazon S3 continues to store the application's static assets.
 
-Testing access through the CloudFront domain and verifying the connection between the frontend and backend API will be performed in **Section 5.8. Testing**.
+Through CloudFront, users can access the CloudMenu frontend using the Distribution Domain Name without directly accessing the S3 bucket.
+
+Testing access to the website through the CloudFront domain and verifying the connection between the frontend and backend API will be performed in **Section 5.8. System Testing**.

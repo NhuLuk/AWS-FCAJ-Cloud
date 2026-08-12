@@ -1,263 +1,110 @@
 ---
-title: "System Testing"
+title: "Kiểm thử hệ thống"
 date: 2026-06-22
 weight: 8
 chapter: false
 pre: "<b>5.8. </b>"
 ---
 
-## 5.8. System Testing
+## 5.8. Kiểm thử hệ thống
 
-After deploying the main components of CloudMenu, the system was tested to verify that the frontend, APIs, and database could operate together successfully.
+Sau khi hoàn thành việc triển khai frontend và backend của CloudMenu, hệ thống được kiểm thử trực tiếp thông qua các giao diện người dùng để xác nhận các thành phần có thể hoạt động cùng nhau trong luồng sử dụng thực tế.
 
-The testing process focused on two main areas:
+Việc kiểm thử các API riêng lẻ đã được thực hiện tại phần **5.5.4. Kiểm thử API**. Vì vậy, phần này tập trung vào kiểm thử chức năng trên giao diện và luồng hoạt động End-to-End của CloudMenu.
 
-- **API Testing:** Verifying that the APIs for creating orders, retrieving orders, and updating order status work correctly.
-- **Functional Testing:** Verifying that the actual CloudMenu interfaces operate correctly for customers and restaurant staff.
+Các giao diện chính được kiểm thử gồm:
 
-The overall system flow tested is:
+- Giao diện đặt món của khách hàng.
+- Giao diện theo dõi trạng thái đơn hàng.
+- Giao diện quản lý đơn hàng của bếp.
+- Restaurant Dashboard.
+
+Luồng kiểm thử tổng thể:
 
 ```text
 Customer
    |
    v
-CloudMenu Frontend
+View Menu & Create Order
    |
    v
-Amazon API Gateway
+Order Tracking
    |
    v
-AWS Lambda
+Kitchen / Restaurant Orders
    |
    v
-Amazon DynamoDB
+Update Order Status
    |
-   +-----------------------+
-   |                       |
-   v                       v
-Order Tracking      Restaurant Management
-                            |
-                            v
-                    Restaurant Dashboard
+   v
+Restaurant Dashboard
 ```
 
-### API Testing
+---
 
-#### Create an Order
+### 5.8.1. Kiểm thử giao diện đặt món
 
-The order creation API is:
+Đầu tiên, truy cập giao diện Customer của CloudMenu để kiểm tra quá trình xem thực đơn và tạo đơn hàng.
+
+Giao diện hiển thị danh sách các món ăn với các thông tin và chức năng chính như:
+
+- Hình ảnh món ăn.
+- Tên món.
+- Giá.
+- Danh mục món ăn.
+- Tìm kiếm và lọc món ăn.
+- Thêm món vào giỏ hàng.
+
+![CloudMenu Customer Menu](/images/5-Workshop/5.8/customer-menu.png)
+
+Khách hàng lựa chọn món ăn và thêm món vào giỏ hàng. Sau khi kiểm tra danh sách món đã chọn và tổng giá trị đơn hàng, khách hàng thực hiện gửi đơn.
+
+Khi đơn hàng được gửi, frontend chuyển thông tin đơn hàng đến backend thông qua Amazon API Gateway.
+
+Luồng xử lý:
 
 ```text
+Customer Interface
+        |
+        v
 POST /order
+        |
+        v
+Amazon API Gateway
+        |
+        v
+createOrder Lambda
+        |
+        v
+Amazon DynamoDB
 ```
 
-Endpoint:
+Sau khi đơn hàng được tạo thành công, thông tin đơn hàng được lưu trong bảng `CloudMenuOrders` với trạng thái ban đầu:
 
 ```text
-https://zcbix27iq9.execute-api.us-east-1.amazonaws.com/order
+PENDING
 ```
 
-The following Request Body was used during testing:
-
-```json
-{
-  "orderId": "ORD003",
-  "tableNumber": "05",
-  "items": [
-    {
-      "name": "Cơm chiên",
-      "price": 50000,
-      "quantity": 2
-    }
-  ],
-  "totalAmount": 100000
-}
-```
-
-Amazon API Gateway forwards the request to the `createOrder` Lambda Function, which processes the order and stores the data in Amazon DynamoDB.
-
-The test returned:
-
-```text
-200 OK
-```
-
-![Test POST Order](images/test-post-order.png)
-
-The result confirms that the order creation API can successfully receive and process the request.
+**Kết quả:** Giao diện Customer có thể hiển thị thực đơn, cho phép khách hàng lựa chọn món và tạo đơn hàng thành công.
 
 ---
 
-#### Retrieve the Order List
+### 5.8.2. Kiểm thử theo dõi trạng thái đơn hàng
 
-The API is:
+Sau khi tạo đơn hàng thành công, khách hàng có thể truy cập giao diện theo dõi đơn hàng để kiểm tra trạng thái xử lý.
 
-```text
-GET /orders
-```
+![CloudMenu Order Tracking](/images/5-Workshop/5.8/order-tracking.png)
 
-Endpoint:
+Giao diện theo dõi hiển thị các thông tin của đơn hàng như:
 
-```text
-https://zcbix27iq9.execute-api.us-east-1.amazonaws.com/orders
-```
+- Mã đơn hàng.
+- Số bàn.
+- Danh sách món ăn.
+- Tổng giá trị đơn hàng.
+- Thời gian đặt.
+- Trạng thái hiện tại của đơn hàng.
 
-The request is forwarded to the `getOrders` Lambda Function, which retrieves order data from the `CloudMenuOrders` table.
-
-The test returned:
-
-```text
-200 OK
-```
-
-![Test GET Orders](images/test-get-orders.png)
-
-The result confirms that the order list can be successfully retrieved through Amazon API Gateway.
-
----
-
-#### Update an Order Status
-
-The API is:
-
-```text
-PUT /orders/{orderId}
-```
-
-During testing, the `ORD003` order was used:
-
-```text
-PUT /orders/ORD003
-```
-
-Request Body:
-
-```json
-{
-  "status": "PREPARING"
-}
-```
-
-The request is forwarded to the `updateOrderStatus` Lambda Function.
-
-The function retrieves the `orderId` from the path parameter and updates the corresponding order status in DynamoDB.
-
-The test returned:
-
-```text
-200 OK
-```
-
-![Test PUT Order](images/test-put-order.png)
-
-The result confirms that the order status can be successfully updated.
-
----
-
-### Error Handling During Testing
-
-During the first test of the order status update API, the system returned:
-
-```text
-500 Internal Server Error
-```
-
-with the following message:
-
-```text
-Object of type Decimal is not JSON serializable
-```
-
-The issue occurred because numeric values retrieved from DynamoDB can be represented using the Python `Decimal` type, while Python's `json.dumps()` does not automatically serialize this type.
-
-The `updateOrderStatus` Lambda Function was updated to convert DynamoDB `Decimal` values into JSON-serializable values before generating the HTTP response.
-
-After updating the Lambda Function and testing:
-
-```text
-PUT /orders/ORD003
-```
-
-again, the API returned:
-
-```text
-200 OK
-```
-
-This confirmed that the serialization issue had been resolved successfully.
-
----
-
-### CloudMenu Functional Testing
-
-After confirming that the backend APIs worked correctly, the CloudMenu interfaces were tested to verify the actual application workflow.
-
-#### Customer Menu
-
-The customer menu interface allows users to browse and select available dishes.
-
-The main information and functions include:
-
-- Dish images.
-- Dish names.
-- Prices.
-- Categories.
-- Add-to-cart functionality.
-- Search and filtering features.
-
-![CloudMenu Customer Menu](images/customer-menu.png)
-
-The test confirms that the menu interface can display dishes and provide the functions required for customers to begin the ordering process.
-
----
-
-#### Order Tracking
-
-After an order is created, customers can monitor its processing status.
-
-![CloudMenu Order Tracking](images/order-tracking.png)
-
-The order tracking interface displays information including:
-
-- Order ID.
-- Order time.
-- Estimated preparation time.
-- Current order status.
-- Order details.
-- Total order amount.
-
-The order status flow is represented as:
-
-```text
-Order Submitted
-      |
-      v
-   Preparing
-      |
-      v
-   Completed
-```
-
-This feature allows customers to monitor the progress of their orders after submission.
-
----
-
-#### Restaurant Order Management
-
-Restaurant staff use the order management interface to monitor and process incoming customer orders.
-
-![CloudMenu Restaurant Orders](images/restaurant-orders.png)
-
-Each order displays information such as:
-
-- Order ID.
-- Table number.
-- Creation time.
-- Ordered items.
-- Total amount.
-- Current status.
-
-Restaurant staff can update the order status according to the following workflow:
+Trong quá trình xử lý, trạng thái đơn hàng thay đổi theo luồng:
 
 ```text
 PENDING
@@ -269,39 +116,125 @@ PREPARING
 COMPLETED
 ```
 
-Status updates are processed through the API:
+Trong đó:
+
+- `PENDING`: Đơn hàng đã được tạo và đang chờ bếp tiếp nhận.
+- `PREPARING`: Đơn hàng đã được tiếp nhận và đang được chế biến.
+- `COMPLETED`: Đơn hàng đã hoàn thành.
+
+Khi phía nhà hàng cập nhật trạng thái, dữ liệu mới được lưu vào Amazon DynamoDB và trạng thái tương ứng được hiển thị trên giao diện theo dõi đơn hàng.
+
+**Kết quả:** Khách hàng có thể theo dõi trạng thái xử lý của đơn hàng sau khi thực hiện đặt món.
+
+---
+
+### 5.8.3. Kiểm thử giao diện quản lý đơn hàng của bếp
+
+Tiếp theo, truy cập giao diện quản lý đơn hàng dành cho nhân viên bếp.
+
+Các đơn hàng được tạo từ Customer Interface sẽ xuất hiện trên giao diện này để nhân viên theo dõi và xử lý.
+
+![CloudMenu Restaurant Orders](/images/5-Workshop/5.8/restaurant-orders.png)
+
+Mỗi đơn hàng hiển thị các thông tin chính như:
+
+- Mã đơn hàng.
+- Số bàn.
+- Thời gian tạo đơn.
+- Danh sách món ăn.
+- Tổng giá trị đơn hàng.
+- Trạng thái hiện tại.
+
+Khi một đơn hàng mới được tạo, trạng thái ban đầu là:
+
+```text
+PENDING
+```
+
+Khi nhân viên bếp bắt đầu xử lý đơn hàng, trạng thái được cập nhật thành:
+
+```text
+PREPARING
+```
+
+Sau khi hoàn thành quá trình chế biến, trạng thái được cập nhật thành:
+
+```text
+COMPLETED
+```
+
+Khi trạng thái được thay đổi trên giao diện, frontend gửi request:
 
 ```text
 PUT /orders/{orderId}
 ```
 
-When the status is changed through the interface, the request is sent to the backend and the corresponding data is updated in DynamoDB.
+đến backend.
+
+Luồng xử lý:
+
+```text
+Kitchen Interface
+       |
+       v
+PUT /orders/{orderId}
+       |
+       v
+Amazon API Gateway
+       |
+       v
+updateOrderStatus Lambda
+       |
+       v
+Amazon DynamoDB
+```
+
+Sau khi DynamoDB được cập nhật, trạng thái mới của đơn hàng được sử dụng bởi các giao diện liên quan trong hệ thống.
+
+**Kết quả:** Giao diện quản lý đơn hàng có thể hiển thị các đơn hàng được tạo từ Customer Interface và cho phép nhân viên cập nhật trạng thái xử lý của đơn hàng.
 
 ---
 
-#### Restaurant Dashboard
+### 5.8.4. Kiểm thử Restaurant Dashboard
 
-CloudMenu provides a Dashboard that allows restaurant staff to monitor the overall activity of the system.
+Cuối cùng, truy cập Restaurant Dashboard để kiểm tra khả năng tổng hợp và hiển thị dữ liệu hoạt động của CloudMenu.
 
-![CloudMenu Restaurant Dashboard](images/restaurant-dashboard.png)
+![CloudMenu Restaurant Dashboard](/images/5-Workshop/5.8/restaurant-dashboard.png)
 
-The Dashboard displays summarized information including:
+Dashboard hiển thị các thông tin tổng quan như:
 
-- Total number of orders.
-- Total revenue.
-- Pending orders.
-- Orders being prepared.
-- Completed orders.
-- Revenue by table.
-- Most frequently ordered dishes.
+- Tổng số đơn hàng.
+- Tổng doanh thu.
+- Số đơn đang chờ.
+- Số đơn đang chế biến.
+- Số đơn đã hoàn thành.
+- Doanh thu theo bàn.
+- Các món ăn được gọi nhiều nhất.
 
-The Dashboard aggregates order data into useful indicators that support restaurant activity monitoring.
+Dữ liệu trên Dashboard được tổng hợp từ các đơn hàng hiện có trong hệ thống.
+
+Khi khách hàng tạo thêm đơn hàng hoặc nhân viên cập nhật trạng thái của đơn hàng, dữ liệu mới được lưu trong DynamoDB và được sử dụng để cập nhật các thông tin thống kê trên Dashboard.
+
+**Kết quả:** Restaurant Dashboard có thể hiển thị các thông tin tổng hợp từ dữ liệu đơn hàng và hỗ trợ phía nhà hàng theo dõi hoạt động của hệ thống.
 
 ---
 
-### End-to-End Testing
+### 5.8.5. Kết quả kiểm thử
 
-After testing the individual functions, the complete CloudMenu workflow was verified from the customer side to the restaurant side.
+Sau khi kiểm thử các giao diện chính của CloudMenu, kết quả thu được như sau:
+
+| Chức năng | Kết quả |
+| :--- | :--- |
+| Hiển thị thực đơn | Thành công |
+| Tìm kiếm và lựa chọn món ăn | Thành công |
+| Thêm món vào giỏ hàng | Thành công |
+| Tạo đơn hàng | Thành công |
+| Theo dõi trạng thái đơn hàng | Thành công |
+| Hiển thị đơn hàng trên giao diện bếp | Thành công |
+| Cập nhật trạng thái đơn hàng | Thành công |
+| Hiển thị dữ liệu thống kê | Thành công |
+
+Luồng End-to-End của CloudMenu được kiểm tra theo quy trình:
 
 ```text
 Customer
@@ -313,51 +246,21 @@ View Menu
 Create Order
    |
    v
-Amazon API Gateway
+PENDING
    |
    v
-createOrder Lambda
+Kitchen receives order
    |
    v
-Amazon DynamoDB
+PREPARING
    |
-   +-------------------------+
-   |                         |
-   v                         v
-Order Tracking        Restaurant Orders
-                              |
-                              v
-                       Update Status
-                              |
-                              v
-                    Amazon API Gateway
-                              |
-                              v
-                  updateOrderStatus Lambda
-                              |
-                              v
-                       Amazon DynamoDB
-                              |
-                              v
-                   Restaurant Dashboard
+   v
+COMPLETED
+   |
+   v
+Restaurant Dashboard
 ```
 
-The overall test results are summarized below:
+Kết quả kiểm thử cho thấy các giao diện chính của CloudMenu có thể phối hợp với backend để thực hiện luồng hoạt động từ khi khách hàng xem thực đơn và tạo đơn hàng, theo dõi trạng thái, đến khi phía nhà hàng tiếp nhận, xử lý và hoàn thành đơn hàng.
 
-| Function | Result |
-| :--- | :--- |
-| Display menu | Successful |
-| Create order | 200 OK |
-| Retrieve orders | 200 OK |
-| Track order status | Successful |
-| Update order status | 200 OK |
-| Restaurant order management | Successful |
-| Display Dashboard | Successful |
-
-### Result
-
-The main CloudMenu functions were successfully tested.
-
-The backend APIs can create, retrieve, and update orders through Amazon API Gateway, AWS Lambda, and Amazon DynamoDB. The customer and restaurant interfaces also support menu browsing, ordering, order tracking, order processing, and dashboard monitoring.
-
-The testing results demonstrate that the main components of CloudMenu can work together to support the application's complete workflow.
+Các API nền tảng đã được kiểm thử riêng tại phần **5.5.4**, trong khi kết quả tại phần này xác nhận các API có thể được sử dụng thành công trong luồng hoạt động thực tế của ứng dụng CloudMenu.

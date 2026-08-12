@@ -1,31 +1,39 @@
 ---
+
 title: "Blog 1"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
----
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+----------------------
 
-# SESSION POLICIES IN AMAZON EKS POD IDENTITY
+# TURNING MILLIONS OF CONTRACTS INTO USEFUL DATA WITH DOCZY.AI AND GENERATIVE AI ON AWS
 
-Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.
+In many enterprises, especially in the healthcare and financial sectors, a large amount of important information is still stored in unstructured documents such as contracts, legal agreements, and invoices.
+
+A single contract can contain dozens or even hundreds of pages with different structures, clauses, and terms. When the number of documents grows to thousands or millions, manually reading, extracting, and reviewing this information becomes time-consuming and difficult to scale.
+
+While exploring real-world applications of Generative AI on AWS, I came across an interesting use case: **Doczy.ai by AArete**, a platform that uses Generative AI and AWS services to automate contract analysis.
 
 Key points to know:
 
-* A session policy is an inline IAM policy specified when creating or updating a Pod Identity association.
-* Effective permissions = intersection between the IAM role permissions and the session policy → the session policy can only narrow permissions, not expand them.
-* Helps avoid over-permissioning when reusing a single IAM role for multiple workloads with different needs.
-* Supports both same-account and cross-account (via IAM role chaining).
-* Significantly reduces the number of IAM roles that need to be managed, helping avoid hitting IAM quota limits in large clusters.
-* Easily configured through the AWS Management Console, AWS CLI, or AWS SDK when creating an association between a Kubernetes ServiceAccount and an IAM role.
+* Previously, AArete used a rule-based approach to process contracts, achieving approximately **55% accuracy** between 2020 and 2023. After moving to an AI-based solution on AWS in 2024, Doczy.ai achieved approximately **99% accuracy**.
+* Doczy.ai uses a technique called **Smart Chunking** to preserve the structure, context, and relationships between different sections of a contract instead of simply splitting a document into fixed-size text chunks.
+* The system combines **semantic analysis** to understand the meaning of the content with **structural analysis** to identify the structure and organization of the document.
+* **Amazon Cognito** supports user authentication, while **Amazon S3** is used to store documents.
+* **AWS Lambda** triggers the document processing workflow, and **Amazon Textract** extracts content from the documents.
+* Subsequent workloads are processed using **Amazon ECS**, while **Amazon Bedrock** provides Generative AI capabilities.
+* The processed results are sent to **Snowflake** for data analysis, while **AWS Secrets Manager** and **Amazon CloudWatch** support security, secrets management, and system monitoring.
+* Over approximately 22 months, Doczy.ai processed **2.5 million documents**, equivalent to around **50 million pages**, made **137 million API calls** to Amazon Bedrock, and processed approximately **442 billion tokens**.
+* The platform can process up to **250,000 documents per week**, achieve approximately **99% accuracy**, and reduce **manual processing time by 97%**.
+* According to AWS, the solution has generated approximately **$330 million in direct and indirect savings** for customers.
 
-This feature is especially useful when you have many applications running on the same IAM role but need different permission restrictions (for example: one pod only reads a specific S3 bucket, another pod only calls certain APIs).
+One of the most interesting aspects of Doczy.ai is that Generative AI does not operate independently. Amazon Bedrock is only one component of a complete pipeline that includes authentication, storage, document processing, compute, AI, data, security, and monitoring.
 
-...Image...
+This use case demonstrates that Generative AI is not limited to building chatbots or generating content. When combined with the right architecture, **Amazon Bedrock, Amazon Textract, and other AWS services can transform millions of pages of unstructured documents into useful and actionable enterprise data.**
 
-...Link...
+![Architecture of Doczy.ai](/images/3-Blogs%20posted/Architecture%20of%20Doczy.ai.png)
 
-...Guide...
+*Architecture of Doczy.ai on AWS*
+
+[Automating contract intelligence with Doczy.ai™ on AWS](https://aws.amazon.com/blogs/architecture/automating-contract-intelligence-with-doczy-ai-on-aws/)

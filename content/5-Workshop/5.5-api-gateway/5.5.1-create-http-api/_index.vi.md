@@ -46,5 +46,3 @@ Trong CloudMenu, API này đóng vai trò trung gian trong luồng:
 **Customer / Kitchen / Manager → API Gateway → Lambda → DynamoDB**
 
 Các route cụ thể sẽ được cấu hình trong bước tiếp theo.
-
-> **Lưu ý:** Trong môi trường CloudMenu hiện tại, `CloudMenuAPI` được triển khai tại `us-east-1`, trong khi các Lambda Function của backend được triển khai tại `ap-southeast-1`. Workshop giữ nguyên cấu hình của hệ thống đang được sử dụng.

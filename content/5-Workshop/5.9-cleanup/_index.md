@@ -8,21 +8,24 @@ pre: "<b>5.9. </b>"
 
 ## 5.9. Resource Cleanup
 
-After completing the deployment and testing of CloudMenu, AWS resources that are no longer required should be cleaned up to prevent unexpected charges.
+After completing the deployment, testing, and evaluation of CloudMenu, AWS resources that are no longer required should be cleaned up to prevent unexpected costs and keep the AWS environment organized.
 
-The main AWS services used in this workshop include:
+The main AWS services used in this Workshop include:
 
 - Amazon CloudFront
 - Amazon S3
 - Amazon API Gateway
 - AWS Lambda
 - Amazon DynamoDB
+- AWS Identity and Access Management (IAM)
 
-> **Note:** Carefully verify your resources and data before deleting them because some deletion operations cannot be undone.
+> **Note:** In the current Workshop environment, CloudMenu resources are still maintained for testing, demonstration, and evaluation purposes. The cleanup procedure below should be performed after the Workshop has been completed and the system is no longer required.
 
-### 1. Delete the CloudFront Distribution
+---
 
-The CloudFront Distribution is used to deliver the CloudMenu frontend from Amazon S3.
+### 1. Clean Up Amazon CloudFront
+
+Amazon CloudFront is used to distribute the CloudMenu frontend from Amazon S3 to users.
 
 Navigate to:
 
@@ -38,32 +41,29 @@ Select the Distribution:
 CloudMenu
 ```
 
-Before deleting the Distribution, disable it first.
+Before deleting the Distribution, verify that CloudMenu is no longer required for testing or demonstration.
 
-Select:
+Then disable the Distribution using the appropriate option provided in the AWS Management Console and wait for the update process to complete.
 
-```text
-CloudMenu
-→ Disable
-```
+Once the Distribution has been disabled and is no longer serving requests, it can be deleted.
 
-Wait until the Distribution update is completed, then select:
+After the CloudFront Distribution is removed, the domain:
 
 ```text
-Delete
+d3be9t7i3323e7.cloudfront.net
 ```
 
-Deleting the CloudFront Distribution stops the delivery of the CloudMenu frontend through CloudFront.
+will no longer be used to distribute the CloudMenu frontend.
 
-![Delete CloudFront Distribution](images/cleanup-cloudfront.png)
+Therefore, the system demonstration and evaluation should be completed before performing this step.
 
 ---
 
-### 2. Delete Objects from the S3 Bucket
+### 2. Clean Up Amazon S3
 
-Amazon S3 is used to store the CloudMenu frontend files.
+Amazon S3 is used to store the static frontend files of CloudMenu.
 
-The bucket used in this workshop is:
+The bucket used in this Workshop is:
 
 ```text
 ozmr-s3-demo-bucket
@@ -72,64 +72,43 @@ ozmr-s3-demo-bucket
 Navigate to:
 
 ```text
-Amazon S3
+AWS Management Console
+→ Amazon S3
 → Buckets
 → ozmr-s3-demo-bucket
 ```
 
-In the **Objects** tab, select the frontend objects and folders and choose:
+Before deleting the bucket, review and remove the objects that are no longer required.
 
-```text
-Delete
-```
-
-These files may include:
+The frontend files and directories may include:
 
 ```text
 frontend/
 index.html
 order.html
+kitchen.html
+dashboard.html
 app.js
 style.css
 ```
 
-Confirm the deletion of the selected objects.
+The actual list of files may vary depending on the frontend version currently deployed.
 
-![Delete S3 Objects](images/cleanup-s3-objects.png)
+After confirming that the objects are no longer required, delete them from the bucket.
 
----
-
-### 3. Delete the S3 Bucket
-
-After deleting the objects, return to the S3 bucket list.
-
-Select:
+Next, return to the S3 bucket list and select:
 
 ```text
 ozmr-s3-demo-bucket
 ```
 
-Then choose:
-
-```text
-Delete
-```
-
-Enter the bucket name for confirmation if required:
-
-```text
-ozmr-s3-demo-bucket
-```
-
-After the operation is completed, the bucket used to store the CloudMenu frontend will be removed.
-
-![Delete S3 Bucket](images/cleanup-s3-bucket.png)
+After verifying that the bucket no longer contains data that needs to be retained, the bucket can be deleted.
 
 ---
 
-### 4. Delete the API Gateway API
+### 3. Clean Up Amazon API Gateway
 
-CloudMenu uses an HTTP API to connect the frontend to the Lambda Functions.
+Amazon API Gateway is used to receive requests from the frontend and forward them to the corresponding AWS Lambda Functions.
 
 Navigate to:
 
@@ -139,9 +118,13 @@ AWS Management Console
 → APIs
 ```
 
-Select the CloudMenu API.
+Select:
 
-The API contains the following routes:
+```text
+CloudMenuAPI
+```
+
+CloudMenuAPI provides the following main routes:
 
 ```text
 POST /order
@@ -149,19 +132,23 @@ GET /orders
 PUT /orders/{orderId}
 ```
 
-Choose:
+Before deleting the API, verify that the CloudMenu frontend no longer needs to perform the following operations:
+
+- Create new orders.
+- Retrieve the order list.
+- Update order status.
+
+After confirming that the API is no longer required, delete:
 
 ```text
-Delete
+CloudMenuAPI
 ```
 
-and confirm the deletion.
-
-![Delete API Gateway](images/cleanup-api-gateway.png)
+Once the API Gateway API is deleted, the CloudMenu API endpoints will no longer be available, and the frontend will no longer be able to send requests to the backend through these endpoints.
 
 ---
 
-### 5. Delete Lambda Functions
+### 4. Clean Up AWS Lambda
 
 AWS Lambda is used to process the backend logic of CloudMenu.
 
@@ -173,7 +160,7 @@ AWS Management Console
 → Functions
 ```
 
-The functions used in CloudMenu include:
+The Lambda Functions used by CloudMenu include:
 
 ```text
 createOrder
@@ -181,20 +168,27 @@ getOrders
 updateOrderStatus
 ```
 
-Select each Lambda Function that is no longer required and choose:
+The Functions provide the following operations:
+
+| Lambda Function | Functionality |
+| :--- | :--- |
+| `createOrder` | Creates a new order and stores it in DynamoDB. |
+| `getOrders` | Retrieves the list of orders from DynamoDB. |
+| `updateOrderStatus` | Updates the status of an existing order. |
+
+After API Gateway has been cleaned up and the Functions are no longer required, delete the following Functions:
 
 ```text
-Actions
-→ Delete
+createOrder
+getOrders
+updateOrderStatus
 ```
 
-Confirm the deletion.
-
-![Delete Lambda Functions](images/cleanup-lambda.png)
+Before deleting them, verify that the Functions are not being used by API Gateway or any other AWS resources.
 
 ---
 
-### 6. Delete the DynamoDB Table
+### 5. Clean Up Amazon DynamoDB
 
 Amazon DynamoDB is used to store CloudMenu order data.
 
@@ -206,54 +200,113 @@ AWS Management Console
 → Tables
 ```
 
-Select:
+Select the table:
 
 ```text
 CloudMenuOrders
 ```
 
-Then choose:
+The table contains order-related information such as:
+
+- `orderId`
+- `tableNumber`
+- `items`
+- `totalAmount`
+- `status`
+- `createdAt`
+- `updatedAt`
+- `completedAt`
+
+Before deleting the table, verify whether the order data is still required for testing, reporting, or system evaluation.
+
+If the data is no longer required, delete the table:
 
 ```text
-Delete
+CloudMenuOrders
 ```
 
-Confirm the operation to delete the table.
+> **Note:** Deleting the `CloudMenuOrders` table will remove the order data stored in the table. If the data needs to be retained, it should be backed up or exported before deletion.
 
-> Deleting the DynamoDB table also removes the order data stored in the table. Only perform this step when the data is no longer required.
+---
 
-![Delete DynamoDB Table](images/cleanup-dynamodb.png)
+### 6. Review IAM Roles and Policies
+
+AWS Lambda Functions require IAM Execution Roles to write logs to Amazon CloudWatch Logs and access the DynamoDB table.
+
+For example, the `createOrder` Function uses the following Execution Role:
+
+```text
+createOrder-role-fmflntg9
+```
+
+This Role provides the permissions required by the Lambda Function, including logging permissions and access to the `CloudMenuOrders` table.
+
+The DynamoDB-related Policy used during the CloudMenu deployment is:
+
+```text
+CloudMenuDynamoPolicy
+```
+
+After the Lambda Functions have been deleted, navigate to:
+
+```text
+AWS Management Console
+→ IAM
+→ Roles
+```
+
+Review the IAM Roles created specifically for CloudMenu.
+
+Next, navigate to:
+
+```text
+AWS Management Console
+→ IAM
+→ Policies
+```
+
+Review the Policies that are no longer required.
+
+If a Role or Policy is no longer attached to or used by any AWS resource, it can be removed.
+
+> **Note:** Do not delete an IAM Role or Policy if it is still being used by another AWS resource. Dependencies should be verified before deletion.
 
 ---
 
 ### Recommended Cleanup Order
 
-The resources can be cleaned up in the following order:
+To minimize dependencies between resources, the cleanup process can be performed in the following order:
 
 ```text
-CloudFront Distribution
+Amazon CloudFront
         ↓
-S3 Objects
+Amazon S3 Objects
         ↓
-S3 Bucket
+Amazon S3 Bucket
         ↓
-API Gateway
+Amazon API Gateway
         ↓
-Lambda Functions
+AWS Lambda Functions
         ↓
-DynamoDB Table
+Amazon DynamoDB Table
+        ↓
+Unused IAM Roles / Policies
 ```
 
-After completing the cleanup process, check the AWS Management Console again to ensure that the resources created specifically for the CloudMenu workshop have been removed or are no longer in use.
+After completing the cleanup process, review the AWS Management Console to ensure that resources created specifically for CloudMenu are no longer active or unnecessarily maintained.
+
+---
 
 ### Result
 
-The cleanup process removes AWS resources that are no longer required after completing the workshop.
+The cleanup procedure identifies and removes AWS resources that are no longer required after the deployment and evaluation of CloudMenu have been completed.
 
-Cleaning up AWS resources helps to:
+Cleaning up resources helps to:
 
-- Prevent unexpected AWS charges.
-- Avoid keeping unused experimental resources.
-- Maintain a clean and manageable AWS environment.
+- Prevent unexpected AWS costs.
+- Avoid maintaining unnecessary testing resources.
+- Keep the AWS environment organized and easier to manage.
+- Remove IAM Roles and Policies that are no longer required.
+- Reduce unnecessary resources in the AWS account.
 
-At this point, the deployment, testing, and cleanup process for **CloudMenu** is complete.
+In the current Workshop environment, CloudMenu resources are still maintained for testing, demonstration, and evaluation purposes. Resource cleanup will be performed after the evaluation process has been completed.

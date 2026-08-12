@@ -46,5 +46,3 @@ In CloudMenu, the API acts as an intermediary in the following flow:
 **Customer / Kitchen / Manager → API Gateway → Lambda → DynamoDB**
 
 The application routes will be configured in the next step.
-
-> **Note:** In the current CloudMenu environment, `CloudMenuAPI` is deployed in `us-east-1`, while the backend Lambda functions are deployed in `ap-southeast-1`. This Workshop preserves the configuration used by the current system.
