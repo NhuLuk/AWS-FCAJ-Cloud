@@ -3,55 +3,128 @@ title: "Sharing and Feedback"
 date: 2026-06-22
 weight: 7
 chapter: false
-pre: " <b> 7. </b> "
+pre: "<b>7. </b>"
 ---
 
-### Overall Evaluation
+## 7. Sharing and Feedback
 
-**1. Working Environment**  
-The working environment was supportive, comfortable, and easy to adapt to. Everyone was willing to help whenever I encountered technical issues — especially with AWS service configuration, ECS Fargate deployment, Lambda debugging, or CI/CD pipeline troubleshooting. The flexible and remote-friendly environment fit well with my schedule. I think the program could add more team-sharing sessions or bonding activities to strengthen connections among interns.
+### General Evaluation
 
-**2. Support from Mentor / Team Admin**  
-The mentor provided detailed and clear guidance, especially when dealing with complex topics such as AWS architecture design, VPC networking, serverless integration with Lambda + EventBridge, CI/CD pipeline setup with CodePipeline, and NestJS backend optimization. Instead of giving direct answers, the mentor encouraged me to analyze and solve problems independently, which I highly appreciate. The admin team was also very helpful with documents, logistics, and general support.
+**1. Learning and Working Environment**
 
-**3. Relevance of Work to Academic Major**  
-The tasks assigned to me matched well with the knowledge I learned in school while also extending to new areas that I had never worked with before. Working with Next.js, NestJS, TypeORM, PostgreSQL, Redis, and a wide range of AWS services (Cognito, ECS, RDS, S3, Lambda, SES, CloudWatch...) helped reinforce both theoretical and practical skills in building cloud-native applications.
+During the **First Cloud AI Journey** program, I found the learning and working environment comfortable, friendly, and flexible. Team members were able to communicate and support each other when facing difficulties while learning AWS services and working on the project.
 
-**4. Learning & Skill Development Opportunities**  
-The internship allowed me to gain valuable hands-on skills, including:
+The flexible working environment allowed me to manage my time effectively between studying, researching documentation, and completing the program activities.
 
-- AWS cloud architecture (VPC, RDS, ElastiCache, S3, CloudFront, ECS Fargate, ALB, Lambda, EventBridge, Cognito, SES, CloudWatch...)
-- Building CI/CD pipelines using CodePipeline & CodeBuild for automated testing and deployment
-- Designing full-stack applications with Next.js + NestJS following modern patterns
-- Implementing serverless workflows with Lambda + EventBridge for budget alert automation
-- Writing technical documentation and analyzing software architecture
+In addition, I think the program could organize more regular discussion or sharing sessions among interns so that participants have more opportunities to exchange experiences and learn from each other's projects.
 
-Soft skills such as teamwork, progress reporting, communication, and handling issues professionally also improved significantly throughout the program.
+### 2. Support from Mentors and Team Admins
 
-**5. Company Culture & Team Spirit**  
-The team culture was positive and respectful. Everyone worked seriously but was still friendly and supportive. Even during busy periods, team members helped each other without hesitation. This made me feel like I was part of the team, not just an intern.
+During the program, the Mentors and Team Admins provided learning materials, guidance, and support when needed.
 
-**6. Internship Policies / Benefits**  
-The program provided flexibility in working hours and gave access to useful learning materials. The opportunity to work on an end-to-end real project — from architecture design to AWS production deployment with monitoring — was one of the biggest benefits, helping me build practical experience beyond what is taught academically.
+Through the guidance and provided resources, I had the opportunity to independently learn more about AWS Cloud, Serverless architecture, and how different AWS services can be integrated to build a practical application.
 
----
+When encountering problems during the project, discussions with Mentors and team members also helped me improve my ability to analyze problems, search for relevant documentation, and experiment with different solutions instead of focusing only on the final result.
 
-### Additional Questions
+### 3. Relevance to My Field of Study
 
-- **What was I most satisfied with during the internship?**  
-  The opportunity to build a complete cloud-native application from scratch — designing architecture, integrating 15+ AWS services, implementing serverless features, setting up CI/CD, and deploying to production with monitoring — was incredibly valuable.
+The topics and activities in the program were closely related to my **Information Technology** major.
 
-- **What should the program improve for future interns?**  
-  It would be beneficial to include more focused technical workshops (e.g., deeper serverless patterns, advanced AWS security configurations, container orchestration) or scheduled study sessions.
+During the development of CloudMenu, I had the opportunity to apply knowledge related to:
 
-- **Would I recommend this internship to others? Why?**  
-  Yes. Because the program offers real project experience, strong mentorship, and practical skill development that directly benefit career growth.
+- Web application development.
+- Databases.
+- APIs and communication between frontend and backend.
+- Cloud computing.
+- Serverless architecture.
+- Basic security and access management.
+- System testing and troubleshooting.
 
----
+Deploying an application on AWS helped me better understand how the knowledge learned at university can be applied to a practical system.
 
-### Suggestions & Expectations
+### 4. Learning Opportunities and Skill Development
 
-- Consider adding more AWS-focused workshops or hands-on labs (especially on serverless, container services, and security).
-- Introduce periodic demo sessions or sprint reviews so interns can learn from each other's progress.
-- Provide additional documentation or standardized AWS deployment checklists.
-- If an advanced or extended internship track becomes available, I would be excited to continue participating.
+The program provided me with opportunities to learn and practice many new topics related to AWS Cloud.
+
+Some of the knowledge and skills I had the opportunity to develop include:
+
+- Understanding Serverless architecture on AWS.
+- Using Amazon S3 to store frontend files.
+- Using Amazon CloudFront to distribute web content.
+- Building HTTP APIs with Amazon API Gateway.
+- Building a Serverless backend with AWS Lambda.
+- Using Amazon DynamoDB for data storage.
+- Understanding IAM Roles and Policies for managing access permissions between AWS services.
+- Testing APIs and troubleshooting issues during service integration.
+- Preparing technical documentation, Worklogs, Proposals, and Workshop materials.
+- Designing architecture diagrams and describing system processing flows.
+
+Through the **CloudMenu** project, I had the opportunity to understand and practice the overall workflow of a Serverless application:
+
+`Customer → CloudFront → S3 → API Gateway → Lambda → DynamoDB`
+
+In addition to technical knowledge, I also improved skills such as self-learning, documentation research, teamwork, time management, and communication when encountering problems.
+
+### 5. Culture and Teamwork
+
+During the program, team members maintained a supportive and collaborative working environment.
+
+Since each member had different study schedules and personal responsibilities, communication and progress coordination were important to ensure that different parts of the project could be integrated successfully.
+
+The teamwork process also helped me better understand the importance of communication, progress sharing, and mutual support when working on a technical project.
+
+### 6. Conditions for Interns
+
+The program provided a relatively flexible schedule, allowing me to proactively study documentation and complete assigned activities.
+
+One of the aspects I appreciated most was the opportunity to gain hands-on experience with AWS services through a specific project. Instead of learning individual services only from theory, I had the opportunity to combine multiple AWS components to build a complete system.
+
+Through CloudMenu, I experienced the process from requirement analysis and solution design to backend development, data storage, frontend deployment, system integration, and testing.
+
+### Other Questions
+
+**What I was most satisfied with**
+
+What I was most satisfied with was the opportunity to apply the AWS knowledge I learned to the **CloudMenu** project.
+
+Through the project, I was able to understand how Amazon S3, Amazon CloudFront, Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and IAM work together in a Serverless architecture.
+
+Completing the workflow from customers viewing the menu and submitting orders to the kitchen receiving and updating order status, while allowing customers to track their orders, helped me better understand how a Cloud application operates from end to end.
+
+**What I think could be improved**
+
+I think the program could include additional guidance or knowledge-sharing sessions on:
+
+- Common Serverless Design Patterns.
+- Application security on AWS.
+- Monitoring and logging with Amazon CloudWatch.
+- Cost optimization for AWS applications.
+- CI/CD and deployment automation.
+
+These topics could help interns gain a deeper understanding of how to operate and improve a system after completing its initial deployment.
+
+**Would I recommend the program to my friends?**
+
+Yes. I think the program is suitable for Information Technology students who are interested in learning about Cloud Computing and AWS.
+
+The combination of learning technical concepts and applying them to a project helps participants better understand how AWS services are used in practical applications.
+
+### Suggestions and Expectations
+
+After participating in the program, I have several suggestions:
+
+- Organize more advanced Workshops on Serverless, Security, Monitoring, and CI/CD.
+- Provide more product demonstration sessions so that teams can share their results and learn from each other.
+- Organize periodic review sessions so that interns can receive feedback during project development.
+- Provide additional checklists or reference materials for designing, deploying, and testing systems on AWS.
+- Provide more examples of real-world architectures to help interns better understand how to select appropriate AWS services for different use cases.
+
+### Conclusion
+
+Overall, the **First Cloud AI Journey** program provided me with valuable opportunities to learn and gain hands-on experience with AWS Cloud.
+
+Through the development of **CloudMenu**, I gained a better understanding of Serverless architecture, AWS service integration, and the process of deploying an application from the frontend to the backend and database.
+
+In addition to technical knowledge, the program also helped me improve my self-learning, problem-solving, teamwork, and technical documentation skills.
+
+I hope that the knowledge and experience gained from this program will provide a strong foundation for me to continue learning and developing my skills in Cloud Computing and Software Development.
