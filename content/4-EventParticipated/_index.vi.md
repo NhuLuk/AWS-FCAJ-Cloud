@@ -1,46 +1,29 @@
 ---
 title: "Các events đã tham gia"
-date: 2024-01-01
+date: 2026-08-08
 weight: 4
 chapter: false
-pre: " <b> 4. </b> "
+pre: "<b>4. </b>"
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Các events đã tham gia
 
-> Trong phần này, các bạn cần liệt kê và mô tả chi tiết các sự kiện (event) mà mình đã tham gia trong suốt quá trình thực tập hoặc làm việc. 
-> 
-> Mỗi sự kiện nên được trình bày theo định dạng Event 1, Event 2, Event 3…, kèm theo các thông tin:
-> * Tên sự kiện
-> * Thời gian tổ chức
-> * Địa điểm (nếu có)
-> * Vai trò của bạn trong sự kiện (người tham dự, hỗ trợ tổ chức, diễn giả, v.v.)
-> * Mô tả ngắn gọn nội dung và hoạt động chính trong sự kiện
-> * Kết quả hoặc giá trị đạt được (bài học, kỹ năng mới, đóng góp cho nhóm/dự án)
-> * Việc liệt kê này giúp thể hiện rõ sự tham gia thực tế của bạn, cũng như các kỹ năng mềm và kinh nghiệm bạn đã tích lũy qua từng sự kiện.
+Trong quá trình tham gia chương trình **First Cloud AI Journey (FCAJ)**, tôi đã có cơ hội tham gia một sự kiện chuyên môn về Generative AI và AI Agent trên nền tảng AWS.
 
+Sự kiện giúp tôi tiếp cận thêm các kiến thức mới ngoài phạm vi kiến trúc Serverless đang được áp dụng trong dự án CloudMenu, đặc biệt là các nội dung liên quan đến Amazon Bedrock AgentCore, Memory, Evaluations, Observability, Policy và Optimization.
 
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
+---
 
-### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
+### [Event 1 – AgentForge Day 2](4.1-Event1/)
 
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
+&emsp;**Tên sự kiện:** AgentForge Day 2 – Advanced Amazon Bedrock AgentCore
 
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
+&emsp;**Chủ đề:** Personalization, Evaluation & Optimization
 
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
+&emsp;**Thời gian:** 09:00 – 11:00, ngày 08/08/2026
 
+&emsp;**Vai trò trong sự kiện:** Người tham dự
 
+&emsp;**Nội dung chính:** Tìm hiểu các khả năng nâng cao của Amazon Bedrock AgentCore, bao gồm Memory, Evaluations, Observability và các AgentCore Components như Registry, Harness, Tools, Payments, Optimization và Policy. Sự kiện cũng bao gồm phần Hands-on Lab giúp người tham dự thực hành một số khả năng của AgentCore.
 
-### [Event 2](4.2-Event2/)
-&emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
-
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
-
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
-
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
-
+&emsp;**Kết quả đạt được:** Hiểu thêm về cách xây dựng, theo dõi, đánh giá và tối ưu AI Agent trên AWS; đồng thời có thêm kiến thức nền tảng về Generative AI để tiếp tục nghiên cứu và ứng dụng trong các hệ thống Cloud sau này.

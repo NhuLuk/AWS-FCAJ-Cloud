@@ -1,126 +1,97 @@
 ---
-title: "Event 1"
-date: 2024-01-01
+title: "AgentForge Day 2"
+date: 2026-08-08
 weight: 1
 chapter: false
-pre: " <b> 4.1. </b> "
+pre: "<b>4.1. </b>"
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
+# Event Report: “AgentForge Day 2 – Advanced Amazon Bedrock AgentCore”
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+**Date:** August 8, 2026  
+**Topic:** Personalization, Evaluation & Optimization  
+**Main Content:** Advanced Amazon Bedrock AgentCore
 
-### Event Objectives
+---
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+### Event Overview
 
-### Speakers
+On **August 8, 2026**, I had the opportunity to participate in **AgentForge Day 2**, with the topic **Personalization, Evaluation & Optimization**. The event gave me an opportunity to explore additional knowledge related to building and operating AI agents on AWS.
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+The main content of the event focused on **Advanced Amazon Bedrock AgentCore**, particularly capabilities that support AI agents in maintaining context, monitoring their activities, evaluating performance, and optimizing their behavior.
 
-### Key Highlights
+The event consisted of two main sessions:
 
-#### Identifying the drawbacks of legacy application architecture
+- An **Amazon Bedrock AgentCore** session from **09:00 – 10:00**.
+- A **Hands-on Lab** from **10:00 – 11:00**, focusing on exploring and practicing several AgentCore capabilities.
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+During the first session, participants were introduced to advanced AgentCore topics such as **Memory, Evaluations, and Observability**. The session also covered several other components and concepts, including **Registry, Harness, Tools, Payments, Optimization, and Policy**.
 
-#### Transitioning to modern application architecture – Microservices
+The Hands-on Lab provided participants with a more practical opportunity to explore some of the topics introduced during the presentation, including adding Memory for personalized agent behavior, exploring Agent Observability, using AgentCore Evaluations to measure agent performance, and exploring AgentCore Harness.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+Through this event, I gained a better understanding that building an AI agent involves more than receiving requests and generating responses. When an agent is used in real-world applications, developers also need to consider contextual information, monitoring, performance evaluation, and continuous optimization.
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+![Participating in AgentForge Day 2](/images/4-EventParticipated/4.1-Event1/agentforge-day2.png)
 
-#### Domain-Driven Design (DDD)
+*Figure 1. Participating in AgentForge Day 2 on August 8, 2026.*
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+---
 
-#### Event-Driven Architecture
+### Main Event Content
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
+#### Amazon Bedrock AgentCore
 
-#### Compute Evolution
+The first part of the event introduced advanced topics related to **Amazon Bedrock AgentCore**.
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+Three important capabilities were highlighted:
 
-#### Amazon Q Developer
+- **Memory**
+- **Evaluations**
+- **Observability**
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+These capabilities support different aspects of the AI agent lifecycle. Memory helps an agent maintain relevant information from interactions, Observability supports monitoring agent activities, while Evaluations provides mechanisms for assessing agent performance.
 
-### Key Takeaways
+Through this session, I gained a clearer understanding of a more complete AI agent development process. Instead of focusing only on building the initial agent logic, developers also need to consider how the agent will be monitored, evaluated, and improved after deployment.
 
-#### Design Mindset
+---
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+#### AgentCore Memory
 
-#### Technical Architecture
+One of the topics I found particularly interesting during the event was **AgentCore Memory**.
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+Memory helps an agent maintain and use information from interactions to provide a more personalized experience. Instead of processing every request as a completely independent interaction, an agent can use relevant contextual information to provide responses that better match the user's situation.
 
-#### Modernization Strategy
+During the Hands-on Lab, participants explored how to:
 
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
+- Add Memory to an agent.
+- Use Memory to support personalized agent behavior.
+- Observe how contextual information can influence agent interactions.
 
-### Applying to Work
+Through this section, I gained a better understanding of the role of Memory in AI agent applications that may interact with users across multiple steps or sessions.
 
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
+Memory also helped me recognize the difference between a system that simply processes individual questions and an agent that can use information from previous interactions to provide a more relevant user experience.
 
-### Event Experience
+---
 
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
+#### AgentCore Evaluations
 
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
+Another important topic introduced during the event was **AgentCore Evaluations**.
 
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
+When developing an AI agent, the ability to generate a response alone is not enough to determine whether the system is performing effectively. Developers also need methods to evaluate the quality and performance of the agent across different use cases.
 
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
+AgentCore Evaluations supports this process by providing mechanisms that can help developers understand how an agent is performing and identify areas that may require further improvement.
 
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
+During the Hands-on Lab, participants explored how **AgentCore Evaluations** can be used to measure agent performance.
 
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
+Through this topic, I learned that AI agent development can be considered a continuous process:
 
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+```text
+Build Agent
+     ↓
+Run Agent
+     ↓
+Observe Behavior
+     ↓
+Evaluate Performance
+     ↓
+Optimize Agent

@@ -1,125 +1,97 @@
 ---
-title: "Event 1"
-date: 2024-01-01
+title: "AgentForge Day 2"
+date: 2026-08-08
 weight: 1
 chapter: false
-pre: " <b> 4.1. </b> "
+pre: "<b>4.1. </b>"
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Bài thu hoạch “AgentForge Day 2 – Advanced Amazon Bedrock AgentCore”
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+**Thời gian tham gia:** 08/08/2026  
+**Chủ đề:** Personalization, Evaluation & Optimization  
+**Nội dung chính:** Advanced Amazon Bedrock AgentCore
 
-### Mục Đích Của Sự Kiện
+---
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+### Tổng quan sự kiện
 
-### Danh Sách Diễn Giả
+Ngày **08/08/2026**, tôi có cơ hội tham gia **AgentForge Day 2**, với chủ đề **Personalization, Evaluation & Optimization**. Đây là một sự kiện giúp tôi tiếp cận thêm các kiến thức liên quan đến việc xây dựng và vận hành AI Agent trên nền tảng AWS.
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+Nội dung chính của chương trình tập trung vào **Advanced Amazon Bedrock AgentCore**, đặc biệt là các khả năng hỗ trợ AI Agent trong quá trình duy trì ngữ cảnh, theo dõi hoạt động, đánh giá hiệu suất và tối ưu cách Agent vận hành.
 
-### Nội Dung Nổi Bật
+Chương trình được chia thành hai phần chính:
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+- Phiên chia sẻ về **Amazon Bedrock AgentCore** từ **09:00 – 10:00**.
+- Phiên **Hands-on Lab** từ **10:00 – 11:00**, tập trung vào việc tìm hiểu và thực hành một số khả năng của AgentCore.
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+Trong phiên đầu tiên, người tham gia được giới thiệu về các nội dung nâng cao của AgentCore như **Memory, Evaluations và Observability**. Ngoài ra, chương trình còn đề cập đến một số thành phần và khái niệm khác gồm **Registry, Harness, Tools, Payments, Optimization và Policy**.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+Phần Hands-on Lab giúp người tham gia có cơ hội tiếp cận thực tế hơn với một số nội dung đã được trình bày, bao gồm thêm Memory để hỗ trợ hành vi Agent có tính cá nhân hóa, tìm hiểu Agent Observability, sử dụng AgentCore Evaluations để đánh giá hiệu suất Agent và khám phá AgentCore Harness.
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+Thông qua sự kiện, tôi hiểu rõ hơn rằng việc xây dựng một AI Agent không chỉ dừng lại ở khả năng nhận yêu cầu và tạo phản hồi. Khi đưa Agent vào các ứng dụng thực tế, cần quan tâm đến khả năng duy trì thông tin ngữ cảnh, theo dõi quá trình hoạt động, đánh giá chất lượng phản hồi và liên tục tối ưu Agent.
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+![Tham gia AgentForge Day 2](/images/4-EventParticipated/4.1-Event1/agentforge-day2.png)
 
-#### Domain-Driven Design (DDD)
+*Hình 1. Hình ảnh trong quá trình tham gia AgentForge Day 2 ngày 08/08/2026.*
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+---
 
-#### Event-Driven Architecture
+### Nội dung chính của sự kiện
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+#### Amazon Bedrock AgentCore
 
-#### Compute Evolution
+Phần đầu của chương trình giới thiệu các nội dung nâng cao liên quan đến **Amazon Bedrock AgentCore**.
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+Trong đó, ba nội dung được tập trung giới thiệu gồm:
 
-#### Amazon Q Developer
+- **Memory**
+- **Evaluations**
+- **Observability**
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+Các khả năng này hỗ trợ những khía cạnh khác nhau trong vòng đời của một AI Agent. Memory hỗ trợ Agent duy trì thông tin cần thiết từ các tương tác, Observability hỗ trợ theo dõi quá trình hoạt động, trong khi Evaluations cung cấp phương pháp để đánh giá hiệu quả của Agent.
 
-### Những Gì Học Được
+Qua phần trình bày này, tôi có cái nhìn rõ hơn về quá trình phát triển AI Agent theo hướng hoàn chỉnh hơn, không chỉ tập trung vào việc xây dựng logic ban đầu mà còn phải quan tâm đến quá trình vận hành và cải tiến Agent sau đó.
 
-#### Tư Duy Thiết Kế
+---
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+#### AgentCore Memory
 
-#### Kiến Trúc Kỹ Thuật
+Một trong những nội dung tôi quan tâm trong sự kiện là **AgentCore Memory**.
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+Memory hỗ trợ Agent duy trì và sử dụng thông tin từ các tương tác để tạo ra trải nghiệm có tính cá nhân hóa hơn. Thay vì mỗi request đều được xử lý như một tương tác hoàn toàn độc lập, Agent có thể sử dụng các thông tin ngữ cảnh phù hợp để đưa ra phản hồi sát với nhu cầu của người dùng hơn.
 
-#### Chiến Lược Hiện Đại Hóa
+Trong phần Hands-on Lab, người tham gia được tìm hiểu cách:
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+- Thêm Memory cho Agent.
+- Sử dụng Memory để hỗ trợ hành vi Agent có tính cá nhân hóa.
+- Quan sát cách thông tin ngữ cảnh có thể ảnh hưởng đến quá trình tương tác của Agent.
 
-### Ứng Dụng Vào Công Việc
+Qua nội dung này, tôi hiểu rõ hơn vai trò của Memory đối với các ứng dụng AI Agent cần tương tác với người dùng trong nhiều phiên hoặc nhiều bước khác nhau.
 
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+Memory cũng giúp tôi nhận ra sự khác biệt giữa một hệ thống chỉ xử lý từng câu hỏi riêng biệt và một Agent có khả năng sử dụng thông tin từ quá trình tương tác để tạo ra trải nghiệm phù hợp hơn.
 
-### Trải nghiệm trong event
+---
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+#### AgentCore Evaluations
 
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
+Một nội dung quan trọng khác của chương trình là **AgentCore Evaluations**.
 
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
+Trong quá trình phát triển AI Agent, việc Agent có thể tạo ra câu trả lời chưa đủ để kết luận hệ thống đang hoạt động hiệu quả. Nhà phát triển còn cần có phương pháp để đánh giá chất lượng và hiệu suất của Agent trong các trường hợp sử dụng khác nhau.
 
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
+AgentCore Evaluations hỗ trợ quá trình đánh giá này, giúp người phát triển có thêm cơ sở để xác định Agent đang hoạt động như thế nào và những phần nào cần tiếp tục được cải thiện.
 
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
+Trong phần Hands-on Lab, người tham gia được tìm hiểu cách sử dụng **AgentCore Evaluations** để đo lường hiệu suất của Agent.
 
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
+Qua nội dung này, tôi hiểu rằng việc phát triển AI Agent có thể được xem như một quá trình liên tục:
 
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+```text
+Build Agent
+     ↓
+Run Agent
+     ↓
+Observe Behavior
+     ↓
+Evaluate Performance
+     ↓
+Optimize Agent
