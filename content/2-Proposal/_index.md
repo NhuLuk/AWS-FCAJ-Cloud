@@ -63,23 +63,67 @@ Backend
 
 Security: AWS IAM: Manages access permissions between AWS services and controls administrative access to the system.
 
-## 4. Timeline (8 weeks)
+## 4. Timeline (8 Weeks)
 
-- **Weeks 1–2 — Analysis & AWS Foundation**
-  - **Week 1:** Finalize the functional requirements and NFRs of CloudMenu; analyze user groups and the QR → Menu → Order → Kitchen → Dashboard workflow.
-  - **Week 2:** Finalize the Serverless Architecture; set up the AWS environment and IAM permissions; identify the roles of S3, CloudFront, API Gateway, Lambda, and DynamoDB.
+The CloudMenu project is carried out over eight weeks, progressing from learning AWS services and Serverless architecture to developing, deploying, integrating, and testing the complete system.
 
-- **Weeks 3–4 — Serverless Frontend & Backend Deployment**
-  - **Week 3:** Deploy the Frontend to Amazon S3 and distribute it through CloudFront; configure the domain and verify accessibility.
-  - **Week 4:** Build and deploy API Gateway + AWS Lambda; implement core APIs for menu, cart, and orders; integrate Lambda with DynamoDB.
+* **Week 1 (22/06 - 26/06) — AWS Cloud and Serverless Fundamentals**
 
-- **Weeks 5–6 — Data, Security & Business Logic**
-  - **Week 5:** Design and finalize the DynamoDB data structure; implement order management, status updates, and the statistical Dashboard..
-  - **Week 6:** Review IAM, API access, and security; apply the least-privilege principle; verify data flows between API Gateway, Lambda, and DynamoDB.
+  * Become familiar with the AWS Cloud platform and its main service categories.
+  * Learn about Serverless architecture and the main components of a web application.
+  * Explore Amazon S3, Amazon CloudFront, Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and AWS IAM.
+  * Build foundational knowledge for the development of the CloudMenu system.
 
-- **Weeks 7–8 — Testing & Finalization**
-  - **Week 7:** Perform end-to-end testing for Customer, Kitchen Staff, and Admin/Manager workflows; use CloudWatch to monitor Lambda/API logs and errors
-  - **Week 8:** Evaluate performance, scalability, and costs; finalize the architecture documentation, deployment guide, and CloudMenu on AWS report.
+* **Week 2 (29/06 - 03/07) — IAM, Amazon S3, and Amazon CloudFront**
+
+  * Learn about AWS IAM and access management principles.
+  * Learn about Amazon S3 and how it can be used to store frontend resources.
+  * Learn about Amazon CloudFront and content delivery over HTTPS.
+  * Practice deploying a static website using Amazon S3 and Amazon CloudFront.
+
+* **Week 3 (06/07 - 10/07) — Amazon DynamoDB and Data Design**
+
+  * Learn about NoSQL databases and Amazon DynamoDB.
+  * Become familiar with Table, Item, Attribute, and Partition Key.
+  * Practice creating, reading, and updating data in DynamoDB.
+  * Design the order data structure for the CloudMenu system.
+  * Define `orderId` as the Partition Key for the `CloudMenuOrders` table.
+
+* **Week 4 (13/07 - 17/07) — AWS Lambda and Serverless Backend**
+
+  * Learn about AWS Lambda and the Function as a Service (FaaS) model.
+  * Practice creating, configuring, and testing Lambda Functions.
+  * Connect AWS Lambda to Amazon DynamoDB using the AWS SDK for Python (`boto3`).
+  * Develop Lambda Functions for creating orders, retrieving orders, and updating order status.
+
+* **Week 5 (20/07 - 24/07) — Amazon API Gateway and REST API**
+
+  * Learn about Amazon API Gateway, REST APIs, and HTTP methods.
+  * Build APIs to support the CloudMenu order processing workflow.
+  * Integrate Amazon API Gateway with AWS Lambda and Amazon DynamoDB.
+  * Configure CORS and connect the frontend to the system backend.
+
+* **Week 6 (27/07 - 31/07) — CloudMenu System Analysis and Development**
+
+  * Analyze requirements and identify the main features of CloudMenu.
+  * Develop the table identification and ordering mechanism using QR Codes.
+  * Build the Customer Interface with menu browsing, shopping cart, and order submission features.
+  * Build the Kitchen Interface for monitoring orders and updating order status.
+
+* **Week 7 (03/08 - 07/08) — CloudMenu Deployment and Integration on AWS**
+
+  * Complete the main components of the CloudMenu system.
+  * Deploy the frontend to Amazon S3 and distribute it through Amazon CloudFront.
+  * Integrate the frontend with Amazon API Gateway, AWS Lambda, and Amazon DynamoDB.
+  * Test the workflow from customer order submission to kitchen processing and order completion.
+
+* **Week 8 (10/08 - 15/08) — CloudMenu Completion and Program Summary**
+
+  * Develop and complete the system's statistical Dashboard.
+  * Complete the order status and processing-time tracking features.
+  * Test, debug, and finalize the CloudMenu system.
+  * Complete the architecture diagrams, processing-flow diagrams, README, Workshop, and report documentation.
+  * Summarize the knowledge and skills gained throughout the First Cloud AI Journey program.
 
 ## 5. Budget
 

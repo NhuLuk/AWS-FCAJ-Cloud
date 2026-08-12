@@ -65,21 +65,66 @@ Security: AWS IAM: quản lý quyền truy cập giữa các AWS Services và ki
 
 ## 4. Timeline (8 tuần)
 
-- **Tuần 1–2 — Phân tích & nền tảng AWS**
-  - **Tuần 1:** Thống nhất yêu cầu chức năng và NFR của CloudMenu; phân tích các nhóm người dùng và quy trình QR → Menu → Order → Kitchen → Dashboard.
-  - **Tuần 2:** Hoàn thiện thiết kế kiến trúc Serverless; thiết lập môi trường AWS và phân quyền IAM; xác định vai trò của S3, CloudFront, API Gateway, Lambda và DynamoDB.
+Dự án CloudMenu được thực hiện trong 8 tuần, từ giai đoạn tìm hiểu các dịch vụ AWS và kiến trúc Serverless đến xây dựng, triển khai, tích hợp và kiểm thử hệ thống hoàn chỉnh.
 
-- **Tuần 3–4 — Triển khai Frontend & Backend Serverless**
-  - **Tuần 3:** Triển khai Frontend lên Amazon S3 và phân phối qua CloudFront; cấu hình domain và kiểm tra khả năng truy cập.
-  - **Tuần 4:** Xây dựng và triển khai API Gateway + AWS Lambda; triển khai các API chính cho menu, giỏ hàng và đơn hàng; kết nối Lambda với DynamoDB.
+* **Tuần 1 (22/06 - 26/06) — AWS Cloud và Serverless cơ bản**
 
-- **Tuần 5–6 — Dữ liệu, bảo mật & chức năng nghiệp vụ**
-  - **Tuần 5:** Thiết kế và hoàn thiện cấu trúc dữ liệu DynamoDB; triển khai các chức năng quản lý đơn hàng, cập nhật trạng thái và Dashboard thống kê.
-  - **Tuần 6:** Rà soát IAM, API access và security; tối ưu quyền theo nguyên tắc least privilege; kiểm tra luồng xử lý giữa API Gateway, Lambda và DynamoDB.
+  * Làm quen với nền tảng AWS Cloud và các nhóm dịch vụ cơ bản.
+  * Tìm hiểu kiến trúc Serverless và các thành phần của một ứng dụng web.
+  * Tìm hiểu tổng quan Amazon S3, Amazon CloudFront, Amazon API Gateway, AWS Lambda, Amazon DynamoDB và AWS IAM.
+  * Xây dựng kiến thức nền tảng để chuẩn bị phát triển hệ thống CloudMenu.
 
-- **Tuần 7–8 — Kiểm thử & hoàn thiện**
-  - **Tuần 7:** Kiểm thử end-to-end các luồng Customer, Kitchen Staff và Admin/Manager; sử dụng CloudWatch để theo dõi log và lỗi Lambda/API.
-  - **Tuần 8:** Đánh giá hiệu năng, khả năng mở rộng và chi phí; hoàn thiện tài liệu kiến trúc, hướng dẫn triển khai và báo cáo CloudMenu trên AWS.
+* **Tuần 2 (29/06 - 03/07) — IAM, Amazon S3 và Amazon CloudFront**
+
+  * Tìm hiểu AWS IAM và các nguyên tắc quản lý quyền truy cập.
+  * Tìm hiểu Amazon S3 và cách lưu trữ các tài nguyên frontend.
+  * Tìm hiểu Amazon CloudFront và cơ chế phân phối nội dung thông qua HTTPS.
+  * Thực hành triển khai website tĩnh với Amazon S3 và Amazon CloudFront.
+
+* **Tuần 3 (06/07 - 10/07) — Amazon DynamoDB và thiết kế dữ liệu**
+
+  * Tìm hiểu cơ sở dữ liệu NoSQL và dịch vụ Amazon DynamoDB.
+  * Làm quen với các thành phần Table, Item, Attribute và Partition Key.
+  * Thực hành tạo, đọc và cập nhật dữ liệu trên DynamoDB.
+  * Thiết kế cấu trúc dữ liệu đơn hàng cho hệ thống CloudMenu.
+  * Xác định `orderId` làm Partition Key cho bảng `CloudMenuOrders`.
+
+* **Tuần 4 (13/07 - 17/07) — AWS Lambda và Serverless Backend**
+
+  * Tìm hiểu AWS Lambda và mô hình Function as a Service (FaaS).
+  * Thực hành tạo, cấu hình và kiểm thử Lambda Function.
+  * Kết nối AWS Lambda với Amazon DynamoDB bằng AWS SDK for Python (`boto3`).
+  * Xây dựng các Lambda Function để tạo đơn hàng, lấy danh sách đơn hàng và cập nhật trạng thái đơn hàng.
+
+* **Tuần 5 (20/07 - 24/07) — Amazon API Gateway và REST API**
+
+  * Tìm hiểu Amazon API Gateway, REST API và các phương thức HTTP.
+  * Xây dựng các API phục vụ quy trình xử lý đơn hàng của CloudMenu.
+  * Tích hợp Amazon API Gateway với AWS Lambda và Amazon DynamoDB.
+  * Cấu hình CORS và kết nối frontend với backend của hệ thống.
+
+* **Tuần 6 (27/07 - 31/07) — Phân tích và xây dựng hệ thống CloudMenu**
+
+  * Phân tích yêu cầu và xác định các chức năng chính của CloudMenu.
+  * Xây dựng cơ chế nhận diện bàn và gọi món thông qua QR Code.
+  * Xây dựng giao diện Customer với menu, giỏ hàng và chức năng gửi đơn.
+  * Xây dựng giao diện Kitchen để theo dõi và cập nhật trạng thái đơn hàng.
+
+* **Tuần 7 (03/08 - 07/08) — Triển khai và tích hợp CloudMenu trên AWS**
+
+  * Hoàn thiện các thành phần chính của hệ thống CloudMenu.
+  * Triển khai frontend lên Amazon S3 và phân phối thông qua Amazon CloudFront.
+  * Tích hợp frontend với Amazon API Gateway, AWS Lambda và Amazon DynamoDB.
+  * Kiểm thử quy trình từ khách hàng gọi món đến bếp tiếp nhận và hoàn thành đơn hàng.
+
+* **Tuần 8 (10/08 - 15/08) — Hoàn thiện CloudMenu và tổng kết chương trình**
+
+  * Xây dựng và hoàn thiện Dashboard thống kê của hệ thống.
+  * Hoàn thiện chức năng theo dõi thời gian và trạng thái đơn hàng.
+  * Kiểm thử, sửa lỗi và hoàn thiện toàn bộ hệ thống CloudMenu.
+  * Hoàn thiện sơ đồ kiến trúc, sơ đồ luồng xử lý, README, Workshop và tài liệu báo cáo.
+  * Tổng kết kiến thức và kỹ năng đạt được trong chương trình First Cloud AI Journey.
+
   
 ## 5. Ngân sách
 
