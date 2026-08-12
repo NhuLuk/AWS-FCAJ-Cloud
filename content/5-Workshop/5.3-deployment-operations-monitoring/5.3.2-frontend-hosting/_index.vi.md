@@ -3,12 +3,12 @@ title: "Frontend hosting"
 date: 2024-01-01
 weight: 2
 chapter: false
-pre: " <b> 4.3.2 </b> "
+pre: " <b> 5.3.2 </b> "
 aliases:
-  - /4-workshop/4.3-deployment-operations-monitoring/4.3.2-frontend-hosting-auth/
+  - /5-workshop/5.3-deployment-operations-monitoring/5.3.2-frontend-hosting-auth/
 ---
 
-## 4.3.2 Frontend hosting
+## 5.3.2 Frontend hosting
 
 CloudMenu sử dụng Amazon S3 để lưu trữ các file frontend và Amazon CloudFront để phân phối nội dung đến người dùng thông qua Internet.
 
@@ -19,7 +19,7 @@ Kitchen: giao diện dành cho bếp theo dõi và cập nhật trạng thái đ
 Manager: giao diện Dashboard dành cho quản lý theo dõi dữ liệu và thống kê.
 
 Kiến trúc frontend được triển khai theo mô hình:
-![Kiến trúc frontend](/images/4-Workshop/AWS_CloudMenu_Frontend.png)
+![Kiến trúc frontend](/images/5-Workshop/AWS_CloudMenu_Frontend.png)
 
 Khi người dùng truy cập CloudFront domain, CloudFront lấy các file frontend từ S3 và phân phối nội dung đến trình duyệt. Nhờ đó, frontend không cần chạy trực tiếp từ máy phát triển hoặc IDE như VS Code.
 
@@ -28,7 +28,7 @@ Khi người dùng truy cập CloudFront domain, CloudFront lấy các file fron
 Hiện tại CloudMenu chưa sử dụng CI/CD tự động cho frontend. Quy trình triển khai được thực hiện thủ công sau khi developer hoàn thành và build source code.
 
 Luồng triển khai hiện tại:
-![Luồng triển khai Frontend](/images/4-Workshop/AWS_CloudMenu_Frontend2.png)
+![Luồng triển khai Frontend](/images/5-Workshop/AWS_CloudMenu_Frontend2.png)
 
 Cách triển khai này phù hợp với giai đoạn phát triển và workshop hiện tại vì đơn giản, dễ kiểm tra và không yêu cầu thiết lập thêm pipeline CI/CD.
 
@@ -51,12 +51,12 @@ https://d3be9t7i3323e7.cloudfront.net/index.html?table=01
 Khi truy cập thành công, người dùng sẽ thấy giao diện CloudMenu và có thể kiểm tra lần lượt:
 
 - Customer: truy cập menu thông qua QR của bàn và tạo đơn hàng.
-![Customer](/images/4-Workshop/AWS_CloudMenu_Customer.png)
+![Customer](/images/5-Workshop/AWS_CloudMenu_Customer.png)
 
 - Kitchen: kiểm tra đơn hàng mới và cập nhật trạng thái.
-![Kitchen](/images/4-Workshop/AWS_CloudMenu_Kitchen.png)
+![Kitchen](/images/5-Workshop/AWS_CloudMenu_Kitchen.png)
 
 - Manager: kiểm tra Dashboard và dữ liệu thống kê.
-![Manager](/images/4-Workshop/AWS_CloudMenu_Manager.png)
+![Manager](/images/5-Workshop/AWS_CloudMenu_Manager.png)
 
 Nếu cả ba giao diện hoạt động bình thường và frontend có thể gọi API Gateway thành công, quá trình hosting frontend đã được triển khai đúng.
