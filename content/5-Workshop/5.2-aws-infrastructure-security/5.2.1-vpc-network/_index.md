@@ -1,102 +1,152 @@
 ---
-title : "VPC and networking"
+title : "VPC and Networking"
 date : 2024-01-01
 weight : 1
 chapter : false
 pre : " <b> 5.2.1 </b> "
 ---
 
-## 5.2.1 VPC and networking
+## 5.2.1 VPC and Networking
 
-CloudMenu uses an AWS network architecture that separates resources that require protection from public-facing components, while taking advantage of managed and serverless services to reduce infrastructure complexity.
+CloudMenu follows a serverless architecture in which most core components rely on AWS managed services. Therefore, the network design does not require every application resource to be deployed inside an Amazon VPC.
 
-Unlike the traditional three-tier architecture used by SpendWiseApp with ALB, ECS, and RDS, CloudMenu uses Amazon S3 + CloudFront for the frontend and API Gateway + Lambda + DynamoDB for the backend. These services are largely managed by AWS at the underlying network level, so the frontend, API Gateway, and DynamoDB do not need to be deployed inside VPC subnets.
+Instead of implementing a traditional three-tier architecture based on an Application Load Balancer, Amazon ECS, and Amazon RDS inside dedicated subnets, CloudMenu uses Amazon S3 and Amazon CloudFront for frontend delivery and Amazon API Gateway, AWS Lambda, and Amazon DynamoDB for backend processing.
+
+AWS manages most of the underlying network infrastructure for these serverless services. As a result, services such as Amazon S3, CloudFront, API Gateway, and DynamoDB do not need to be deployed directly into the public or private subnets of the CloudMenu VPC.
+
+The following networking components may become relevant as CloudMenu expands:
 
 | Component | Role |
 | :--- | :--- |
-| **VPC** | A private virtual network used to manage AWS resources that require a dedicated network boundary. In the current serverless architecture, the VPC is mainly required when Lambda needs to access private resources or when additional network-isolated components are introduced. |
-| **Internet Gateway** |Provides connectivity between the VPC and the public Internet for resources in public subnets when required. It is not used as a direct access path to DynamoDB or Lambda. |
-| **NAT Gateway** | Allows resources in private subnets to send outbound traffic to the Internet without assigning public IP addresses. It may be required when Lambda is deployed inside a VPC and needs to access external services. |
-| **VPC endpoint** | Provides private connectivity from VPC resources to supported AWS services without routing traffic through the public Internet. This can reduce dependency on NAT Gateway for AWS service traffic.|
-| **Security Group** | Controls network traffic for resources with network interfaces inside the VPC, particularly when Lambda is connected to a VPC or when CloudMenu is extended with private resources.|
+| **Amazon VPC** | Provides an isolated virtual network for AWS resources that require network-level isolation. In the current architecture, a VPC becomes necessary mainly when Lambda must access private resources or when additional VPC-based backend components are introduced. |
+| **Internet Gateway** | Provides Internet connectivity for appropriate resources in public subnets. It is not used as a direct access path to Lambda or DynamoDB. |
+| **NAT Gateway** | Allows resources located in private subnets to establish outbound Internet connections without assigning public IP addresses directly to those resources. |
+| **VPC Endpoint** | Provides connectivity from resources inside a VPC to supported AWS services without requiring the traffic to depend on the public Internet path. |
+| **Security Group** | Controls network traffic for resources with network interfaces inside a VPC, such as a VPC-connected Lambda function or private backend resources added in the future. |
 
+### VPC and Subnet Design
 
-### VPC and subnets
+Amazon VPC (Virtual Private Cloud) provides a logically isolated network environment in AWS. It allows the architecture to define IP address ranges, subnets, routing, gateways, and network security controls.
 
-A Virtual Private Cloud (VPC) is a private virtual network in AWS that provides control over IP address ranges, subnets, routing, and network security mechanisms. In the current CloudMenu architecture, not every AWS service needs to be placed inside a VPC.
+However, using AWS does not mean that every service must be placed inside a VPC.
 
-The frontend is stored in Amazon S3 and distributed through Amazon CloudFront. These are managed services and do not need to be placed in VPC subnets. Similarly, Amazon API Gateway and Amazon DynamoDB are managed by AWS at the underlying network infrastructure level.
+In CloudMenu, frontend files are stored in Amazon S3 and distributed to users through Amazon CloudFront. These are AWS managed services and do not need to be placed inside CloudMenu subnets.
 
-If AWS Lambda is deployed outside a VPC, it can communicate with AWS services such as DynamoDB without requiring a dedicated VPC, subnet, or NAT Gateway. This approach is suitable for CloudMenu during the testing phase because it reduces the number of infrastructure components that need to be managed.
+Similarly, Amazon API Gateway provides the API entry point for the frontend, while DynamoDB provides the managed NoSQL database layer. Neither service requires dedicated CloudMenu subnets for the current architecture.
 
-If Lambda needs to access private resources, the VPC can be configured with subnets such as:
+AWS Lambda can also operate without being attached to a customer VPC. In the current implementation, Lambda can communicate with DynamoDB using AWS SDK operations and the required IAM permissions without requiring CloudMenu to deploy a NAT Gateway or a dedicated public/private subnet architecture.
 
-| Subnet group | Count | Purpose |
+This approach is suitable for the current development and testing environment because it reduces the number of networking components that need to be configured and maintained.
+
+If Lambda needs to access private resources in the future, the architecture can be extended with a subnet design such as:
+
+| Subnet Group | Number | Purpose |
 | :--- | :---: | :--- |
-| **Public** | 2 | One public subnet per Availability Zone for resources that require direct Internet connectivity or for NAT Gateway deployment as the architecture expands. |
-| **Private (application)** | 2 | One private subnet per Availability Zone for Lambda or other backend resources that require network isolation. These resources do not receive direct inbound traffic from the Internet. |
+| **Public Subnets** | 2 | One subnet can be deployed in each Availability Zone for components that require public routing or networking resources such as a NAT Gateway. |
+| **Private Subnets** | 2 | One subnet can be deployed in each Availability Zone for Lambda or backend resources that require network isolation and should not receive direct inbound Internet traffic. |
 
-For the current CloudMenu architecture, public and private subnets are only required if Lambda or other backend resources need VPC connectivity. This avoids introducing unnecessary VPC complexity when it is not required.
+This represents a possible future architecture and does not mean that the current CloudMenu implementation requires four subnets.
 
-### Network Flow
+Public and private subnets should only be introduced when actual application resources need to run inside the VPC. This avoids unnecessary networking complexity while the current serverless architecture does not require subnet-level isolation.
 
-The main CloudMenu access flows are organized as follows:
+### CloudMenu Network Flow
 
-**Customer / Kitchen / Dashboard → CloudFront → S3**
+CloudMenu has two primary network flows: frontend content delivery and backend data processing.
 
-for static frontend assets, and:
+For frontend content:
 
-**Customer / Kitchen / Dashboard → API Gateway → Lambda → DynamoDB**
+**Customer / Kitchen / Manager → Amazon CloudFront → Amazon S3**
 
-for API and data-related requests.
+Users access the application through CloudFront, which distributes HTML, CSS, JavaScript, images, and other static assets stored in Amazon S3.
 
-Within these flows:
+For API and application data:
 
-- CloudFront serves as the frontend distribution layer.
-- S3 acts as the origin for frontend files and static assets.
-- API Gateway serves as the public API entry point.
-- Lambda processes business logic and performs data operations.
-- DynamoDB is accessed through the backend and is not directly exposed to clients.
+**Customer / Kitchen / Manager → Amazon API Gateway → AWS Lambda → Amazon DynamoDB**
 
-Therefore, clients do not require direct access to the database or private backend resources.
+Within this flow:
 
-### Security Group (application and data)
+- **Amazon CloudFront** distributes frontend content to users.
+- **Amazon S3** stores frontend files and static assets.
+- **Amazon API Gateway** receives HTTP requests from the frontend.
+- **AWS Lambda** executes CloudMenu business logic.
+- **Amazon DynamoDB** stores order information and is accessed through the backend rather than directly by the client.
 
-A Security Group is a stateful virtual firewall used by resources with network interfaces inside a VPC. Security Groups define allowed inbound and outbound traffic, while traffic that is not explicitly permitted is denied by default.
+This design separates frontend delivery from application data processing.
 
-In the current serverless architecture, CloudMenu does not require Security Groups for S3, CloudFront, API Gateway, or DynamoDB. If Lambda is connected to a VPC, Security Groups can be used to control traffic between Lambda and private resources.
+In particular, the Customer, Kitchen, and Manager browsers do not require direct permissions to the `CloudMenuOrders` table. The frontend sends requests to API Gateway, and Lambda performs the required DynamoDB operations using its assigned IAM permissions.
 
-For example:
+### Security Groups
 
-| Security Group | Role |
+A Security Group acts as a stateful virtual firewall for AWS resources that have network interfaces inside a VPC.
+
+Inbound and outbound rules define the network traffic that is permitted for the associated resources.
+
+In the current CloudMenu serverless architecture, Security Groups are not required for Amazon S3, Amazon CloudFront, Amazon API Gateway, or Amazon DynamoDB.
+
+If Lambda remains outside the VPC, CloudMenu also does not need to create a Security Group solely for Lambda to communicate with DynamoDB.
+
+Security Groups become relevant when the architecture is expanded and Lambda or other backend resources are deployed inside a VPC.
+
+Potential Security Groups in a future architecture include:
+
+| Security Group | Purpose |
 | :--- | :--- |
-| Lambda Security Group | Attached to Lambda when deployed inside a VPC; controls outbound traffic from Lambda to required private resources. |
-| Database/Private Resource Security Group | Used if the system is extended with a database or other services running inside the VPC; only allows traffic from the Lambda Security Group or other authorized sources. |
-| VPC Endpoint Security Group | Used for Interface VPC Endpoints; allows HTTPS (TCP 443) traffic from VPC resources to AWS service endpoints. |
+| **Lambda Security Group** | Associated with Lambda when the function is connected to a VPC and used to control required network communication with private resources. |
+| **Private Resource Security Group** | Can protect a database or another private service and restrict access to the Lambda Security Group or other approved sources. |
+| **VPC Endpoint Security Group** | Can be associated with Interface VPC Endpoints to control HTTPS connectivity from resources inside the VPC. |
 
-### VPC endpoint
+Security Groups should therefore be introduced according to actual network communication requirements rather than created before any resource requires them.
 
-A VPC Endpoint allows resources inside a VPC to communicate with supported AWS services through the AWS private network without routing traffic through the public Internet. This becomes useful when CloudMenu is expanded and Lambda is deployed inside a VPC.
+### VPC Endpoints
 
-Two main endpoint types can be used:
+A VPC Endpoint provides connectivity between resources inside a VPC and supported AWS services without requiring the communication to depend entirely on the public Internet path.
 
-- Gateway Endpoint — commonly used for Amazon S3 and configured through route tables.
-- Traffic to S3 can use the AWS private network instead of a NAT Gateway.
-- Interface Endpoint — creates one or more network interfaces inside a subnet and provides private connectivity to supported AWS services.
+VPC Endpoints are not mandatory in the current CloudMenu architecture because Lambda currently operates outside a VPC.
 
-When CloudMenu uses Lambda outside a VPC, VPC Endpoints are not required. If Lambda is moved into private subnets, appropriate endpoints can be introduced to reduce traffic through the NAT Gateway and improve network control.
+If Lambda is moved into private subnets in the future, VPC Endpoints can be considered to provide private connectivity to required AWS services and, in some scenarios, reduce dependency on a NAT Gateway.
 
-| Resource | Type | Subnet / route table | Operational note |
-| :--- | :--- | :--- | :--- |
-| S3 VPC Endpoint | Gateway | Allows VPC resources to access S3 through the AWS private network. |
-| CloudWatch Logs Endpoint | Interface | Allows VPC resources to send logs to CloudWatch Logs without fully relying on a NAT Gateway. |
-| ECR API Endpoint | Interface | Provides access to the ECR API if CloudMenu is extended to a container-based backend. |
-| ECR DKR Endpoint | Interface |Provides access to the ECR Docker registry when container images are used.|
+Two important endpoint categories are:
 
-### Networking Direction
+- **Gateway Endpoint:** supported by selected AWS services such as Amazon S3 and associated with VPC route tables.
+- **Interface Endpoint:** creates network interfaces inside the VPC and provides private connectivity to supported AWS services through AWS PrivateLink.
 
-During the testing phase, CloudMenu prioritizes a minimal serverless architecture, avoiding the deployment of VPCs, NAT Gateways, and multiple subnets unless there is a specific requirement. This reduces both infrastructure costs and operational complexity.
+Possible endpoints for a future CloudMenu architecture include:
 
-As the system grows, a VPC can be introduced to provide network isolation for backend resources or private databases. Lambda can then be deployed in private subnets and use NAT Gateway or VPC Endpoints depending on its Internet and AWS service connectivity requirements.
+| Resource | Type | Operational Purpose |
+| :--- | :--- | :--- |
+| **S3 VPC Endpoint** | Gateway | Allows appropriate resources inside the VPC to access Amazon S3 through the endpoint instead of relying on an Internet path. |
+| **CloudWatch Logs Endpoint** | Interface | Can provide private connectivity from VPC resources to CloudWatch Logs. |
+| **ECR API Endpoint** | Interface | May be used if the backend is later deployed using container images and requires access to the Amazon ECR API. |
+| **ECR DKR Endpoint** | Interface | Supports connectivity to the Amazon ECR Docker Registry for container-based workloads. |
 
-This approach allows CloudMenu to maintain a simple architecture at a small scale while providing a path toward stronger network isolation as security and scalability requirements increase.
+The ECR-related endpoints are not required by the current CloudMenu implementation. They represent possible future components only if the backend evolves toward container-based workloads.
+
+### NAT Gateway and Internet Access
+
+A NAT Gateway is not required by the current CloudMenu architecture.
+
+When Lambda operates outside a VPC, a NAT Gateway does not need to be created simply to allow the function to communicate with DynamoDB.
+
+In a future architecture, if Lambda is deployed inside private subnets and also requires outbound Internet connectivity, a NAT Gateway may be deployed in a public subnet to provide the required outbound path.
+
+However, introducing a NAT Gateway adds another infrastructure component to manage and may generate additional costs even for relatively low-traffic environments.
+
+For this reason, CloudMenu should only introduce a NAT Gateway when a specific connectivity requirement exists rather than deploying one by default in the development environment.
+
+### Future Networking Direction
+
+During the current development stage, CloudMenu prioritizes a simple serverless architecture. Keeping Lambda outside a VPC when there are no private resources reduces the number of subnets, route tables, gateways, and Security Groups that need to be managed.
+
+The current architecture can therefore remain based on:
+
+**CloudFront → S3**
+
+and:
+
+**API Gateway → Lambda → DynamoDB**
+
+As CloudMenu grows, requirements such as a private database, internal services, or stronger network isolation may justify introducing a dedicated VPC architecture.
+
+At that stage, Lambda can be connected to private subnets, Security Groups can restrict network traffic, and VPC Endpoints or a NAT Gateway can be selected according to the actual connectivity requirements of the backend.
+
+This approach allows CloudMenu to avoid unnecessary infrastructure complexity during the development stage while preserving a clear path toward stronger network isolation as security requirements, traffic, and system scale increase.

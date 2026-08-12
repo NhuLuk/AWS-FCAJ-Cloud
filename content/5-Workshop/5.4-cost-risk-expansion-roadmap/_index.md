@@ -1,56 +1,73 @@
 ---
-title : "Cost, risk, and expansion roadmap"
+
+title : "Cost, Risks, and Future Expansion"
 date : 2024-01-01
 weight : 5
 chapter : false
 pre : " <b> 5.4. </b> "
----
+-----------------------
 
-## 5.4 Cost, risk, and expansion roadmap
+## 5.4. Cost, Risks, and Future Expansion
 
-### Cost optimization
-CloudMenu prioritizes managed and serverless AWS services to reduce operational overhead and avoid maintaining continuously running servers. The main services whose costs should be monitored include Amazon S3, Amazon CloudFront, Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and Amazon CloudWatch. If optional components are introduced, their associated costs, such as Amazon Cognito, AWS WAF, NAT Gateway, and VPC Endpoints, should also be considered.
+### Cost Optimization
 
-For development and testing environments, the following cost optimization measures can be applied:
+CloudMenu is built using a serverless architecture and managed AWS services to reduce operational costs and avoid maintaining continuously running servers. The main services that need to be monitored in terms of cost include Amazon S3, Amazon CloudFront, Amazon API Gateway, AWS Lambda, Amazon DynamoDB, and Amazon CloudWatch.
 
-- Use S3 and Lambda according to actual requirements and avoid unnecessary resources or functions.
-- Optimize the storage size and request volume of S3, while monitoring CloudFront requests and data transfer.
-- Monitor and control the number of requests processed by API Gateway and Lambda.
-- Design DynamoDB tables efficiently and avoid unnecessary read/write operations.
-- Optimize CloudWatch Logs, particularly log retention, to avoid storing unnecessary logs for long periods.
-- Enable Cognito, WAF, VPC, NAT Gateway, or VPC Endpoints only when their functionality is actually required.
-- Prefer Lambda functions without VPC connectivity during the testing phase when there is no requirement to access private resources, avoiding unnecessary NAT Gateway costs.
-- Use the AWS Free Tier where appropriate during the testing phase and regularly monitor costs through AWS Cost Explorer and Billing.
+For development and testing environments, several cost optimization measures can be applied:
 
-### Risks and mitigation
-The main risks associated with CloudMenu include:
+* Use Amazon S3 to store frontend files while monitoring storage usage, request volume, and data transfer.
+* Monitor Amazon CloudFront requests and data transfer, especially when the number of users increases.
+* Optimize the number of AWS Lambda invocations and execution duration to reduce costs related to invocation and compute time.
+* Design DynamoDB according to the actual CloudMenu workload, reduce unnecessary read operations, and optimize access patterns for the `CloudMenuOrders` table.
+* Monitor the number of requests sent to Amazon API Gateway, particularly for frequently called APIs such as Get Orders.
+* Manage CloudWatch Logs appropriately and configure suitable log retention periods to avoid storing unnecessary log data for long periods.
+* Take advantage of AWS Free Tier where appropriate for the testing environment and regularly review costs through AWS Billing and Cost Explorer.
+* Only introduce additional services such as VPC, NAT Gateway, AWS WAF, or Amazon Cognito when the system has an actual requirement, helping keep the architecture simple and avoid unnecessary costs.
 
-- Cost increase risk: A significant increase in requests to API Gateway, Lambda, DynamoDB, or CloudFront can increase costs based on usage.
-- Configuration risks: Incorrect S3 public access, IAM policies, or API Gateway configurations may increase the risk of unauthorized access.
-- Data loss or inconsistency: Errors during order processing or DynamoDB updates may affect menu information and order status.
-Secret and credential exposure: Storing API keys, credentials, or sensitive information directly in source code may lead to information leakage.
-- Deployment risks: Changes to the frontend, Lambda functions, or database schema may introduce errors or temporarily affect existing functionality.
-- AWS service dependency: Excessive dependency on a specific AWS service may make future architectural changes more complex.
+Because CloudMenu uses Lambda and DynamoDB in a serverless model, operational costs can increase or decrease according to actual usage instead of requiring a fixed cost for a continuously running application server.
 
-The following mitigation measures can be applied:
+### Risks and Mitigation
 
-- Apply the Least Privilege principle to IAM users and IAM Roles.
-- Do not store secrets or credentials directly in source code; use appropriate secret management services such as AWS Secrets Manager or AWS Systems Manager Parameter Store when required.
-- Enable S3 Block Public Access and allow CloudFront to access the S3 origin through an appropriate access-control mechanism.
-- Apply authentication and authorization to APIs when required, especially for Kitchen and Dashboard functionality.
-- Use CloudWatch Logs and Metrics to detect errors and monitor abnormal system activity.
-- Implement appropriate backup and recovery mechanisms for DynamoDB data.
-- Use a pre-release checklist and test critical APIs before production deployment.
+CloudMenu has several potential risks that should be considered during development and deployment.
 
-### Expansion roadmap
-CloudMenu can be expanded gradually through the following stages:
+**Cost increase risk:** A significant increase in requests to API Gateway, Lambda, DynamoDB, or CloudFront may result in higher usage-based costs.
 
-- Standardize CI/CD: Build automated pipelines for the frontend and backend, including build, testing, and deployment stages.
-- Improve testing: Add unit tests, integration tests, and smoke tests for critical APIs such as order creation, order status updates, and menu management.
-- Add authentication and authorization: Integrate Amazon Cognito to manage user accounts and access control between Customer, Kitchen, and Dashboard interfaces.
-- Strengthen security: Introduce AWS WAF, policy hardening, secret rotation, and advanced access-control mechanisms as the system moves toward production.
-- Improve observability: Build CloudWatch Dashboards, alarms, and centralized logging to monitor API Gateway, Lambda, and DynamoDB.
-Scale the architecture based on workload: Introduce VPC and VPC Endpoints when backend components require access to private resources, adding network complexity only when there is a practical requirement.
-- Production readiness: As the number of restaurants, users, and orders increases, the system can be extended with database optimization, caching, asynchronous processing, and appropriate high-availability mechanisms based on actual workload requirements.
+**Configuration risk:** Incorrect configuration of Amazon S3, IAM policies, API Gateway, or CloudFront may cause unauthorized access or prevent the system from operating correctly.
 
-The overall goal is to keep CloudMenu simple and cost-efficient during the testing phase while maintaining a clear path toward a production-ready architecture as usage grows.
+**Data loss or inconsistency risk:** Errors during order creation, order retrieval, or status updates may result in incorrect information being stored in the `CloudMenuOrders` table.
+
+**Credential exposure risk:** Storing AWS Access Keys, Secret Access Keys, or other sensitive information directly in source code may lead to credential leakage.
+
+**Manual frontend deployment risk:** CloudMenu currently uploads frontend files to Amazon S3 manually. As a result, files may be missed, an incorrect version may be uploaded, or CloudFront may continue to distribute an older version of the application.
+
+**Lambda update risk:** Changes to backend logic or API Gateway configuration may affect the Customer, Kitchen, and Manager interfaces.
+
+**AWS service dependency risk:** CloudMenu depends on several AWS managed services. Therefore, future architecture changes need to consider the dependencies and compatibility between these services.
+
+The following measures can be used to reduce these risks:
+
+* Apply the **Least Privilege** principle to IAM Roles and policies.
+* Do not store AWS credentials or secrets directly in source code or commit them to GitHub.
+* Configure Amazon S3 permissions appropriately and restrict write or delete permissions when they are not required.
+* Do not allow the frontend to access DynamoDB directly; all data operations should go through API Gateway and Lambda.
+* Use CloudWatch Logs and Metrics to identify errors and monitor unusual system activity.
+* Establish appropriate backup and recovery mechanisms for DynamoDB data.
+* Test important APIs before deploying a new version.
+* Use a deployment checklist when uploading frontend files or updating Lambda functions to reduce errors during manual deployment.
+
+### Future Expansion Roadmap
+
+CloudMenu can be expanded gradually according to the scale and actual requirements of the system.
+
+* **CI/CD automation:** Build an automated pipeline from GitHub to build and deploy the frontend to Amazon S3 while also automating the deployment of Lambda functions.
+* **Improved testing:** Add unit tests, integration tests, and smoke tests for important workflows such as order creation, order retrieval, and order-status updates.
+* **Authentication and authorization:** Integrate Amazon Cognito when the system requires account management and role-based access for Customer, Kitchen, and Manager users.
+* **Improved API security:** Add authentication, authorization, rate limiting, and AWS WAF when CloudMenu is deployed in a production environment with higher traffic.
+* **Improved observability:** Build CloudWatch Dashboards and Alarms to monitor API Gateway, Lambda, DynamoDB, and detect errors or unusual resource usage.
+* **Data model expansion:** Add tables or entities such as `MenuItems`, `Tables`, `Restaurants`, and `OrderHistory` when the system requires more complete restaurant-management functionality.
+* **Multi-restaurant support:** If CloudMenu evolves into a multi-tenant platform, the data model and authorization mechanism can be expanded so that each restaurant can independently manage its menu, tables, and orders.
+* **Asynchronous processing:** When background tasks such as sending notifications, updating reports, or synchronizing data are required, suitable AWS event-driven services can be introduced.
+* **Performance optimization:** As request volume and data size increase, caching, DynamoDB Streams, or suitable analytics services can be considered according to the actual workload.
+* **Improved network security:** VPC, VPC Endpoints, or more complex network components should only be added when the backend needs access to private resources or requires stronger network-level controls.
+
+The objective of this roadmap is to keep CloudMenu simple, serverless, and cost-efficient during the development stage while providing a foundation for future growth as the number of restaurants, users, and orders increases.

@@ -21,5 +21,5 @@ The content is organized into the following main groups for easier reference:
 1. [5.1 CloudMenu system overview and architecture](5.1-system-overview-architecture/)
 2. [5.2 AWS infrastructure foundation, network layers, and security](5.2-aws-infrastructure-security/)
 3. [5.3 Terraform deployment (by layer)](5.3-deployment-operations-monitoring/)
-4. [5.4 Operating costs and potential risks](5.5-cost-risk-expansion-roadmap/)
-5. [5.5 Clean up](5.6-legacy-cleanup/)
+4. [5.4 Operating costs and potential risks](5.4-cost-risk-expansion-roadmap/)
+5. [5.5 Clean up](5.5-legacy-cleanup/)

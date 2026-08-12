@@ -5,7 +5,7 @@ weight: 1
 chapter: false
 pre: " <b> 5.3.1 </b> "
 aliases:
-  - /4-workshop/5.3-deployment-operations-monitoring/5.3.1-vpc-network/
+  - /5-workshop/5.3-deployment-operations-monitoring/5.3.1-vpc-network/
 ---
 
 ## 5.3.1 Run infrastructure with Terraform
