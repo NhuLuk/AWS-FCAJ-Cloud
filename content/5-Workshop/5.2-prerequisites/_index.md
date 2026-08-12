@@ -23,4 +23,3 @@ The following prerequisites are required:
 - A mobile device capable of scanning QR codes for testing the Customer Interface.
 - A stable Internet connection.
 
-> **Note:** During the workshop, review the AWS resources that have been created and remove resources that are no longer required after completing the workshop to avoid unnecessary costs.

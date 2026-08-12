@@ -23,11 +23,6 @@ The AWS services used to deploy CloudMenu include:
 
 After signing in to the AWS Management Console, use the search bar at the top of the console to access the required services.
 
-<!-- FIGURE 5.2.1-1:
-Screenshot of the AWS Management Console after signing in.
-Include the search bar and main console interface.
-Do not expose the AWS Account ID or other sensitive information. -->
-
 ![AWS Management Console](/images/5-Workshop/5.2/aws-console.png)
 
 ### AWS Region
@@ -35,10 +30,6 @@ Do not expose the AWS Account ID or other sensitive information. -->
 Regional resources used in this workshop should be deployed consistently within the selected AWS Region to simplify configuration and integration between services.
 
 Before creating resources, verify the selected Region in the AWS Management Console and use the appropriate Region throughout the deployment process.
-
-<!-- FIGURE 5.2.1-2:
-Optional screenshot showing the Region selected in the AWS Console.
-Only include this image if it adds useful information. -->
 
 ### Browser and Testing Device
 

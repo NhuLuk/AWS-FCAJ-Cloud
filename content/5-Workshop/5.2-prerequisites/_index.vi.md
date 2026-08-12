@@ -22,5 +22,3 @@ Các yêu cầu chuẩn bị gồm:
 - Trình duyệt Web để truy cập AWS Management Console và kiểm thử ứng dụng.
 - Điện thoại hoặc thiết bị có khả năng quét mã QR để kiểm thử giao diện Customer.
 - Kết nối Internet ổn định.
-
-> **Lưu ý:** Trong quá trình thực hiện Workshop, nên kiểm tra các tài nguyên AWS đã tạo và xóa những tài nguyên không còn sử dụng sau khi hoàn thành để hạn chế chi phí phát sinh.

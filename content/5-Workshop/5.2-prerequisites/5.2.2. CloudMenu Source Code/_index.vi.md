@@ -22,10 +22,6 @@ Frontend của CloudMenu cung cấp ba giao diện chính:
 
 Các tài nguyên frontend sau khi được chuẩn bị để triển khai sẽ được upload lên Amazon S3 và phân phối đến người dùng thông qua Amazon CloudFront.
 
-<!-- HÌNH 5.2.2-1:
-Dùng ảnh giao diện Customer mà em đã gửi:
-ảnh trang CloudMenu hiển thị danh sách món ăn. -->
-
 ![CloudMenu Customer Interface](/images/5-Workshop/5.2/customer-interface.png)
 
 ### Backend

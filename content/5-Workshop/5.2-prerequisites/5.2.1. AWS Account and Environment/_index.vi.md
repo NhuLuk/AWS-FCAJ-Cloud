@@ -23,11 +23,6 @@ Các dịch vụ được sử dụng trong quá trình triển khai CloudMenu g
 
 Sau khi đăng nhập vào AWS Management Console, có thể sử dụng thanh tìm kiếm ở phía trên giao diện để truy cập từng dịch vụ cần thiết.
 
-<!-- HÌNH 5.2.1-1:
-Chụp màn hình AWS Management Console sau khi đăng nhập.
-Nên chụp phần thanh Search và giao diện Console.
-Không để lộ Account ID hoặc thông tin nhạy cảm. -->
-
 ![AWS Management Console](/images/5-Workshop/5.2/aws-console.png)
 
 ### AWS Region
@@ -35,10 +30,6 @@ Không để lộ Account ID hoặc thông tin nhạy cảm. -->
 Các tài nguyên có phạm vi Region trong Workshop cần được triển khai nhất quán trong cùng Region để thuận tiện cho quá trình cấu hình và kết nối giữa các dịch vụ.
 
 Trước khi tạo tài nguyên, kiểm tra Region đang được lựa chọn trên AWS Management Console và sử dụng Region phù hợp trong suốt quá trình triển khai.
-
-<!-- HÌNH 5.2.1-2:
-Chụp góc trên bên phải AWS Console có Region mà nhóm thực tế sử dụng.
-Nếu ảnh này không bổ sung nhiều thông tin thì có thể bỏ. -->
 
 ### Trình duyệt và thiết bị kiểm thử
 

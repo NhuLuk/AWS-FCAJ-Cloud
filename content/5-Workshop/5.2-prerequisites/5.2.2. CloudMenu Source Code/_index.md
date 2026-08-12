@@ -22,9 +22,6 @@ The CloudMenu frontend provides three main interfaces:
 
 The frontend resources will be uploaded to Amazon S3 and distributed to users through Amazon CloudFront.
 
-<!-- FIGURE 5.2.2-1:
-Use the existing CloudMenu Customer Interface screenshot. -->
-
 ![CloudMenu Customer Interface](/images/5-Workshop/5.2/customer-interface.png)
 
 ### Backend

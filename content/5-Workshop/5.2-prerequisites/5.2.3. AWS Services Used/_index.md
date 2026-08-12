@@ -37,8 +37,5 @@ The frontend sends HTTP requests to API Gateway. API Gateway forwards the reques
 
 IAM provides the permissions required for Lambda to access DynamoDB and other related AWS resources.
 
-<!-- OPTIONAL FIGURE:
-The overall CloudMenu AWS architecture can be placed here.
-Skip this figure if the same architecture diagram is already displayed in Section 5.1. -->
 
 After completing these prerequisites, the required AWS resources can be created and each CloudMenu component can be deployed.

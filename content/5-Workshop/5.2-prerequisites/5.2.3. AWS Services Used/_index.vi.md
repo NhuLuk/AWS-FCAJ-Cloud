@@ -37,18 +37,6 @@ Frontend gửi HTTP request đến API Gateway. Request sau đó được chuy�
 
 IAM được sử dụng để cấp các quyền cần thiết cho Lambda khi truy cập DynamoDB và các tài nguyên AWS liên quan.
 
-<!-- HÌNH 5.2.3-1:
-Đặt sơ đồ kiến trúc tổng thể CloudMenu mà nhóm đã vẽ.
-Đây là hình có cả:
-- User
-- CloudFront
-- S3
-- API Gateway
-- Lambda
-- DynamoDB
-- IAM
--->
-
 ![Kiến trúc AWS CloudMenu](/images/AWS_CloudMenu.png)
 
 Sau khi hoàn thành các bước chuẩn bị trên, có thể bắt đầu tạo các tài nguyên AWS và triển khai từng thành phần của CloudMenu.
