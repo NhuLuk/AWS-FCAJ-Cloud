@@ -2,39 +2,35 @@
 title: "Week 3 Worklog"
 weight: 3
 chapter: false
-pre: "<b>1.3. </b>"
+pre: " <b> 1.3. </b> "
 ---
 
-### Week 3 Objectives
+### Week 3 Goals
 
-- Learn about the NoSQL database model and Amazon DynamoDB on AWS.
-- Understand the main components of DynamoDB, including Table, Item, Attribute, and Partition Key.
-- Practice creating tables and adding, reading, and updating data in Amazon DynamoDB.
-- Learn how to design an appropriate data structure for storing order information in the CloudMenu system.
+- Understand **High Availability** and **Scalability** concepts on AWS.
+- Learn about **RDS, Aurora, and ElastiCache**.
+- Practice configuring **Route 53** for DNS and traffic routing.
+- Study and practice designing **AWS Architecture Patterns**.
 
-**Duration:** 06/07/2026 - 10/07/2026
+**Time Period:** 06/07/2026 - 10/07/2026
 
 ---
 
-### Weekly Task Overview
+### Weekly Tasks Overview
 
-| Day | Activities | Start Date | End Date | References |
-| ---- | ---------- | ---------- | -------- | ---------- |
-| 1 | - Learn about the **NoSQL** database model <br> + Understand the basic differences between relational databases and NoSQL databases <br> + Learn about the characteristics and common use cases of NoSQL <br> + Explore an overview of **Amazon DynamoDB** | 06/07/2026 | 06/07/2026 | [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) |
-| 2 | - Learn about the main components of **Amazon DynamoDB** <br> + Table <br> + Item <br> + Attribute <br> + Partition Key <br> + Understand how DynamoDB organizes and retrieves data | 07/07/2026 | 07/07/2026 | [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) |
-| 3 | - Practice using **Amazon DynamoDB** <br> + Create a DynamoDB Table <br> + Configure a Partition Key <br> + Add sample data to the Table <br> + Read and update Items using the AWS Management Console | 08/07/2026 | 08/07/2026 | [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) |
-| 4 | - Learn how to design order data using **DynamoDB** <br> + Identify the information required for an order <br> + Design a data structure containing Order ID, Table Number, Items, Total Amount, and Status <br> + Learn how to store a list of dishes within a DynamoDB Item | 09/07/2026 | 09/07/2026 | [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) |
-| 5 | - Design the data structure for the **CloudMenu** system <br> + Create the `CloudMenuOrders` table <br> + Use `orderId` as the Partition Key <br> + Define the attributes `tableNumber`, `items`, `totalAmount`, `status`, `createdAt`, `updatedAt`, and `completedAt` <br> + Verify the storage and retrieval of order data | 10/07/2026 | 10/07/2026 | [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) |
+| Day | Activity                                                                                                                                                                                                                                 | Start Date | End Date   | Reference                              |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | -------------------------------------- |
+| 1 | - Study **High Availability & Scalability** <br> + Learn about the **Multi-AZ** architecture and its role in improving system availability. <br> + Practice configuring an **Auto Scaling Group** <br> + Learn about the role of **Elastic Load Balancer (ELB)** in distributing traffic. | 06/07/2026   | 06/07/2026    |  <https://000010.awsstudygroup.com/> |
+| 2 | - Study **Amazon RDS** and **Amazon Aurora** <br> + Practice launching an RDS Instance with a Multi-AZ configuration. <br> + Learn about and experiment with Read Replicas and the Failover mechanism. <br> + Study Aurora Clusters and their automatic recovery capabilities. | 07/07/2026   | 07/07/2026    | <https://000010.awsstudygroup.com/> |
+| 3 | - Work with **Amazon ElastiCache** <br> + Learn about and compare the Redis and Memcached engines. <br> + Practice creating and configuring a Cache Cluster. <br> + Monitor the performance and operation of the Cache Cluster using Amazon CloudWatch. | 08/07/2026   | 08/07/2026    | <https://000019.awsstudygroup.com/> |
+| 4 | - Configure and practice using Amazon Route 53. <br> + Practice creating Hosted Zones and configuring DNS Records. <br> Test Latency-Based Routing across different AWS Regions. | 09/07/2026   | 09/07/2026    | <https://aws.amazon.com/route53/> |
+| 5 | - Study Classic Solutions Architectures. <br> + Analyze Multi-Tier and Serverless architectures. <br> + Explore Design Patterns for highly scalable systems. | 10/07/2026   | 10/07/2026  | <https://aws.amazon.com/architecture/> |
 
 ---
 
 ### Week 3 Achievements
 
-- Understood the NoSQL database model and the role of Amazon DynamoDB in a Serverless architecture.
-- Learned the fundamental components of DynamoDB, including Table, Item, Attribute, and Partition Key.
-- Practiced creating tables and adding, reading, and updating data in Amazon DynamoDB.
-- Understood how to select an appropriate Partition Key for order data.
-- Designed an order data structure suitable for the business requirements of CloudMenu.
-- Created the `CloudMenuOrders` table with `orderId` as the Partition Key.
-- Defined the main order attributes, including `tableNumber`, `items`, `totalAmount`, `status`, `createdAt`, `updatedAt`, and `completedAt`.
-- Prepared the data layer for integrating Amazon DynamoDB with AWS Lambda in the following implementation steps.
+- Gain a solid understanding of **High Availability** strategies, including Multi-AZ, Failover, Auto Scaling Groups, and ELB.
+- Strengthen knowledge of **AWS Database** services, including RDS, Aurora, and ElastiCache.
+- Understand **DNS and Routing** with Route 53, including Hosted Zones, Routing Policies, Health Checks, and Failover Routing.
+- Develop system design skills by integrating **Compute, Database, and Networking** to build flexible and cost-efficient architectures.

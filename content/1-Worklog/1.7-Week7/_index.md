@@ -2,37 +2,35 @@
 title: "Week 7 Worklog"
 weight: 7
 chapter: false
-pre: " <b> 1.7. </b> "
+pre: " <b>1.7.</b>"
 ---
 
-### Week 7 Objectives
+### Week 7 Goals
 
-- Complete the integration of the CloudMenu system components on AWS.
-- Deploy the frontend to Amazon S3 and distribute the content through Amazon CloudFront.
-- Connect the frontend with Amazon API Gateway, AWS Lambda, and Amazon DynamoDB.
-- Test the complete ordering workflow from customers to the kitchen and resolve integration issues.
+- Analyze and identify the functional requirements of the CloudMenu system.
+- Design the ordering and order management workflows for different user groups.
+- Understand the Serverless Architecture and data flow between system components.
+- Explore the roles of AWS services used in the CloudMenu system.
 
-**Duration:** 03/08/2026 - 07/08/2026
+**Time Period:** 03/08/2025 - 07/08/2025
 
 ---
 
 ### Weekly Task Overview
 
-| Day | Activities | Start Date | End Date | References |
-| ---- | ---------- | ---------- | -------- | ---------- |
-| 1 | - Complete the main components of the **CloudMenu** system <br> + Review the customer and Kitchen interfaces <br> + Verify the Lambda Functions and APIs <br> + Check the data structure in the `CloudMenuOrders` table | 03/08/2026 | 03/08/2026 | - |
-| 2 | - Deploy the CloudMenu frontend to **Amazon S3** <br> + Upload HTML, CSS, JavaScript, and image files <br> + Verify the structure and paths of frontend files <br> + Configure Amazon S3 as the Origin for CloudFront | 04/08/2026 | 04/08/2026 | [https://aws.amazon.com/s3/](https://aws.amazon.com/s3/) |
-| 3 | - Distribute the frontend through **Amazon CloudFront** <br> + Configure a CloudFront Distribution <br> + Access CloudMenu through the CloudFront Domain <br> + Perform CloudFront Invalidation after frontend updates <br> + Test the interface on desktop and mobile devices | 05/08/2026 | 05/08/2026 | [https://aws.amazon.com/cloudfront/](https://aws.amazon.com/cloudfront/) |
-| 4 | - Integrate the components of the **CloudMenu** system <br> + Connect the frontend to Amazon API Gateway <br> + Verify the API Gateway → AWS Lambda → Amazon DynamoDB flow <br> + Check CORS configuration and resolve frontend API request issues <br> + Verify order data stored in DynamoDB | 06/08/2026 | 06/08/2026 | [https://aws.amazon.com/api-gateway/](https://aws.amazon.com/api-gateway/) |
-| 5 | - Test the complete **CloudMenu** system <br> + Scan a QR Code to access the correct table <br> + Select menu items and submit an order from the customer interface <br> + Verify the order on the Kitchen interface <br> + Update the status from `PENDING` → `PREPARING` → `COMPLETED` <br> + Verify that the updated order status is displayed to the customer | 07/08/2026 | 07/08/2026 | - |
+| Day | Activity                                                                                                                                                                                                                                                           | Start Date   | End Date     | Reference                               |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------ | ---------------------------------------- |
+| 1 | - Begin writing the Proposal for the CloudMenu project. <br> + Complete the Executive Summary and Problem Statement for the table-side online ordering system. <br> + Describe the overall system architecture (Frontend – Backend – Database – AWS Services). <br> + Research the AWS services planned for use, including S3, CloudFront, API Gateway, Lambda, DynamoDB, ElastiCache, and others. | 03/08/2026 | 03/08/2026 | - |
+| 2 | - CloudMenu System Requirements Analysis <br> + Analyze the main functionalities of the CloudMenu system. <br> + Identify requirements for three user groups: Customers, Kitchen Staff, and Admin/Managers. <br> + Analyze the ordering workflow from scanning the QR code, selecting dishes, placing orders, to tracking order status. | 04/08/2026 | 04/08/2026 | - |
+| 3 | - Functionality and Workflow Design <br> + Design the Menu, Cart, and Order management workflows. <br> + Define the order processing and status update flow: Order Submitted → Preparing → Completed. <br> +Identify data to be stored and displayed, including order ID, table number, dishes, total amount, and order time. | 05/08/2026 | 05/08/2026 | - |
+| 4 | - System Architecture Design <br> + Design the Serverless Architecture for CloudMenu. <br> + Clarifying data flow: User → Frontend → Backend → Database/Cache/S3. <br> + Analyze the data flow between Frontend, API Gateway, Lambda, and DynamoDB. <br> + Design the statistical Dashboard for Admin/Managers, including orders, revenue, order status, and most-ordered dishes. | 06/08/2026 | 06/08/2026 | - |
+| 5 | - AWS Services Research and Selection <br> + Research the role of Amazon S3 and CloudFront in Frontend deployment. <br> + Explore API Gateway, AWS Lambda, and DynamoDB for the Serverless Backend. <br> + Study AWS IAM for access control and system security. | 07/08/2026 | 07/08/2026 | <https://aws.amazon.com/backup/> |
 
 ---
 
 ### Week 7 Achievements
 
-- Completed the integration of the main CloudMenu system components.
-- Deployed the frontend to Amazon S3 and distributed the website through Amazon CloudFront.
-- Successfully connected the frontend with Amazon API Gateway, AWS Lambda, and Amazon DynamoDB.
-- Identified and resolved issues related to CORS and frontend-backend communication.
-- Successfully tested table identification using QR Codes and URL parameters.
-- Completed the order processing workflow from customer order submission to kitchen processing and order completion.
+- Identified the main functionalities for **Customers, Kitchen Staff, and Admin/Managers**.
+- Designed the **Menu, Cart, and Order** workflows and order status updates.
+- Designed the overall **Serverless Architecture** using **S3, CloudFront, API Gateway, Lambda, and DynamoDB**.
+- Gained an understanding of **IAM** for access control and system security.

@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 8"
+title: "Nhật ký Tuần 8"
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
@@ -7,32 +7,29 @@ pre: " <b> 1.8. </b> "
 
 ### Mục tiêu Tuần 8
 
-- Hoàn thiện các chức năng và giao diện của hệ thống CloudMenu.
-- Xây dựng Dashboard thống kê và hoàn thiện quá trình kiểm thử hệ thống.
-- Hoàn thiện các sơ đồ kiến trúc, luồng hoạt động và tài liệu kỹ thuật của dự án.
-- Tổng kết quá trình thực tập và chuẩn bị báo cáo cuối kỳ.
+- Nâng cao khả năng thiết kế **AWS Solutions Architecture** theo hướng production-ready.
+- Tìm hiểu cách tích hợp các dịch vụ AWS để xây dựng hệ thống **Serverless** linh hoạt và tự động.
+- Áp dụng **AWS Well-Architected Framework** để đánh giá và tối ưu kiến trúc CloudMenu.
+- Chuẩn bị kiến thức cho các giai đoạn **IaC, DevOps và CI/CD**.
 
-**Thời gian:** 10/08/2026 - 15/08/2026
+**Thời gian:** 10/08/2026 - 14/08/2026
 
 ---
 
 ### Tổng quan Nhiệm vụ Tuần
 
-| Ngày | Hoạt động | Ngày bắt đầu | Ngày kết thúc | Tài liệu tham khảo |
-| ---- | --------- | ------------ | ------------- | ------------------ |
-| 1 | - Xây dựng và hoàn thiện **Dashboard CloudMenu** <br> + Hiển thị tổng số đơn hàng và tổng doanh thu <br> + Thống kê số đơn theo trạng thái <br> + Thống kê doanh thu theo bàn <br> + Thống kê các món ăn được gọi nhiều nhất | 10/08/2026 | 10/08/2026 | - |
-| 2 | - Hoàn thiện chức năng theo dõi thời gian đơn hàng <br> + Lưu thời gian tạo đơn `createdAt` <br> + Cập nhật thời gian thay đổi trạng thái `updatedAt` <br> + Lưu thời gian hoàn thành đơn `completedAt` <br> + Hiển thị thời gian và trạng thái phù hợp trên giao diện Kitchen | 11/08/2026 | 11/08/2026 | - |
-| 3 | - Kiểm thử và rà soát toàn bộ hệ thống **CloudMenu** <br> + Kiểm thử chức năng gọi món bằng QR theo từng bàn <br> + Kiểm tra luồng Customer → API Gateway → Lambda → DynamoDB → Kitchen <br> + Kiểm tra việc cập nhật trạng thái đơn hàng <br> + Sửa các lỗi giao diện, API và dữ liệu phát sinh trong quá trình kiểm thử | 12/08/2026 | 12/08/2026 | - |
-| 4 | - Hoàn thiện tài liệu và các sơ đồ của dự án <br> + System Architecture Diagram <br> + Order Workflow Diagram <br> + Use Case Diagram <br> + Data Model Diagram <br> + Deployment/Request Flow Diagram <br> + Rà soát README và tài liệu Workshop | 13/08/2026 | 13/08/2026 | [https://aws.amazon.com/architecture/](https://aws.amazon.com/architecture/) |
-| 5 | - Hoàn thiện và tổng kết dự án **CloudMenu** <br> + Rà soát các dịch vụ AWS đã sử dụng <br> + Kiểm tra nội dung Worklog, Proposal và Workshop <br> + Tổng hợp kết quả đạt được và các hạn chế hiện tại của hệ thống <br> + Chuẩn bị báo cáo và thuyết trình cuối kỳ | 14/08/2026 | 14/08/2026 | - |
+| Ngày | Hoạt động                                                                                                                                                                                                                                                                                | Ngày bắt đầu | Ngày kết thúc | Tài liệu tham khảo                           |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------- | -------------------------------------------- |
+| 1    | - Advanced Solutions Architecture  <br> + Thiết kế kiến trúc production-ready cho hệ thống CloudMenu. <br> + Nghiên cứu các mô hình kiến trúc: Serverless Architecture, Event-Driven Architecture và Microservices <br> + Phân tích khả năng mở rộng và độ tin cậy của hệ thống khi số lượng đơn hàng tăng cao. | 10/08/2026   | 10/08/2026    | -   |
+| 2    | - Tích hợp các dịch vụ AWS nâng cao  <br> + Tìm hiểu cách sử dụng AWS Lambda để xử lý và cập nhật trạng thái đơn hàng. <br> + Nghiên cứu Amazon EventBridge cho các tác vụ theo lịch và xử lý sự kiện. <br> + Tìm hiểu khả năng sử dụng Amazon SES để gửi thông báo cho khách hàng hoặc quản lý. <br> + Phân tích cách kết hợp các dịch vụ AWS để xây dựng quy trình xử lý đơn hàng tự động. | 11/08/2026   | 11/08/2026    | -  |
+| 3    | - AWS Well-Architected Framework  <br> + Nghiên cứu và áp dụng các nguyên tắc của AWS Well-Architected Framework. <br> + Phân tích các trụ cột chính: Security, Reliability, Performance Efficiency, Cost Optimization và Operational Excellence | 12/08/2026   | 12/08/2026    | -                   |
+| 4    | - Tổng kết và hoàn thiện kiến trúc CloudMenu  <br> + Rà soát và hoàn thiện kiến trúc CloudMenu theo hướng production-ready. <br> + Đánh giá khả năng tích hợp giữa S3, CloudFront, API Gateway, Lambda, DynamoDB, IAM và các dịch vụ AWS bổ sung.   | 13/08/2026   | 13/08/2026    | -                   |
 
----
 
 ### Thành tựu Tuần 8
 
-- Hoàn thiện Dashboard thống kê số lượng đơn hàng, doanh thu, trạng thái đơn, doanh thu theo bàn và món ăn được gọi nhiều.
-- Hoàn thiện việc lưu trữ và hiển thị các thông tin thời gian của đơn hàng.
-- Kiểm thử và hoàn thiện toàn bộ luồng hoạt động của hệ thống CloudMenu từ khách hàng đến bếp.
-- Hoàn thiện các sơ đồ kiến trúc, luồng xử lý, mô hình dữ liệu và Use Case của hệ thống.
-- Hoàn thiện README, Worklog, Proposal, Workshop và các tài liệu kỹ thuật liên quan.
-- Tổng kết quá trình xây dựng CloudMenu và những kiến thức, kỹ năng đạt được trong suốt chương trình AWS First Cloud Journey.
+- Thiết kế và hoàn thiện kiến trúc **CloudMenu** theo hướng production-ready.
+- Hiểu và áp dụng các mô hình **Serverless, Event-Driven và Microservices**.
+- Nắm được cách tích hợp **Lambda, EventBridge, SES** vào quy trình xử lý và thông báo.
+- Áp dụng **AWS Well-Architected Framework** để đánh giá Security, Reliability, Performance, Cost và Operational Excellence.
+- Củng cố kiến thức AWS Architecture và sẵn sàng cho giai đoạn **IaC, DevOps và CI/CD**.

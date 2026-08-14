@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 7"
+title: "Nhật ký Tuần 7"
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
@@ -7,32 +7,30 @@ pre: " <b> 1.7. </b> "
 
 ### Mục tiêu Tuần 7
 
-- Hoàn thiện việc tích hợp các thành phần của hệ thống CloudMenu trên nền tảng AWS.
-- Triển khai frontend lên Amazon S3 và phân phối nội dung thông qua Amazon CloudFront.
-- Kết nối frontend với Amazon API Gateway, AWS Lambda và Amazon DynamoDB.
-- Kiểm thử toàn bộ quy trình gọi món từ khách hàng đến bếp và xử lý các lỗi phát sinh.
+- Phân tích và xác định các yêu cầu chức năng của hệ thống CloudMenu.
+- Thiết kế quy trình gọi món và quản lý đơn hàng cho các nhóm người dùng.
+- Nắm được kiến trúc Serverless và luồng xử lý giữa các thành phần hệ thống.
+- Tìm hiểu vai trò của các dịch vụ AWS được sử dụng trong CloudMenu.
 
-**Thời gian:** 03/08/2026 - 07/08/2026
+**Thời gian:** 03/08/2025 - 07/08/2025
 
 ---
 
 ### Tổng quan Nhiệm vụ Tuần
 
-| Ngày | Hoạt động | Ngày bắt đầu | Ngày kết thúc | Tài liệu tham khảo |
-| ---- | --------- | ------------ | ------------- | ------------------ |
-| 1 | - Hoàn thiện các thành phần của hệ thống **CloudMenu** <br> + Kiểm tra giao diện khách hàng và giao diện Kitchen <br> + Kiểm tra các Lambda Function và API đã xây dựng <br> + Kiểm tra cấu trúc dữ liệu trong bảng `CloudMenuOrders` | 03/08/2026 | 03/08/2026 | - |
-| 2 | - Triển khai frontend CloudMenu lên **Amazon S3** <br> + Upload các file HTML, CSS, JavaScript và hình ảnh <br> + Kiểm tra cấu trúc và đường dẫn của các file frontend <br> + Cấu hình Amazon S3 làm Origin cho CloudFront | 04/08/2026 | 04/08/2026 | [https://aws.amazon.com/s3/](https://aws.amazon.com/s3/) |
-| 3 | - Phân phối frontend thông qua **Amazon CloudFront** <br> + Cấu hình CloudFront Distribution <br> + Truy cập CloudMenu thông qua CloudFront Domain <br> + Thực hiện CloudFront Invalidation sau khi cập nhật frontend <br> + Kiểm tra giao diện trên máy tính và điện thoại | 05/08/2026 | 05/08/2026 | [https://aws.amazon.com/cloudfront/](https://aws.amazon.com/cloudfront/) |
-| 4 | - Tích hợp các thành phần của hệ thống **CloudMenu** <br> + Kết nối frontend với Amazon API Gateway <br> + Kiểm tra luồng API Gateway → AWS Lambda → Amazon DynamoDB <br> + Kiểm tra CORS và xử lý các lỗi khi frontend gọi API <br> + Kiểm tra dữ liệu đơn hàng được lưu trong DynamoDB | 06/08/2026 | 06/08/2026 | [https://aws.amazon.com/api-gateway/](https://aws.amazon.com/api-gateway/) |
-| 5 | - Kiểm thử toàn bộ hệ thống **CloudMenu** <br> + Quét QR để truy cập đúng bàn <br> + Chọn món và gửi đơn từ giao diện khách hàng <br> + Kiểm tra đơn hàng trên giao diện Kitchen <br> + Cập nhật trạng thái `PENDING` → `PREPARING` → `COMPLETED` <br> + Kiểm tra trạng thái đơn hiển thị lại cho khách hàng | 07/08/2026 | 07/08/2026 | - |
+| Ngày | Hoạt động                                                                                                                                                                                                                                                                                     | Ngày bắt đầu | Ngày kết thúc | Tài liệu tham khảo                 |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------- | ---------------------------------- |
+| 1    | - Bắt đầu viết Proposal cho đồ án CloudMenu. <br> + Hoàn thiện Executive Summary và Problem Statement về hệ thống gọi món trực tuyến tại bàn. <br> + Mô tả kiến trúc tổng quan của hệ thống (Frontend – Backend – Database – AWS Services). <br> + Nghiên cứu các dịch vụ AWS dự kiến sử dụng như S3, CloudFront, API Gateway, Lambda, DynamoDB, ElastiCache,… | 03/08/2026   | 03/08/2026    | -                   |
+| 2    | - Phân tích yêu cầu hệ thống CloudMenu <br> + Phân tích các chức năng chính của CloudMenu. <br> + Xác định yêu cầu cho ba nhóm người dùng: Khách hàng, Nhân viên bếp và Admin/Manager. <br> + Phân tích quy trình gọi món từ quét QR, chọn món, gửi đơn đến theo dõi trạng thái đơn hàng. | 04/08/2026   | 04/08/2026    | -                   |
+| 3    | - Thiết kế chức năng và quy trình xử lý <br> + Thiết kế quy trình quản lý Menu, Cart và Order. <br> + Xây dựng quy trình xử lý đơn hàng và cập nhật trạng thái: Đã gửi đơn → Đang chế biến → Đã hoàn thành. <br> + Xác định các thông tin cần lưu trữ và hiển thị như mã đơn, số bàn, món ăn, tổng tiền và thời gian đặt món. | 05/08/2026   | 05/08/2026    | -                   |
+| 4    | - Thiết kế kiến trúc hệ thống <br> + Thiết kế kiến trúc Serverless cho CloudMenu. <br> + Phân tích luồng dữ liệu giữa Frontend, API Gateway, Lambda và DynamoDB. <br> + Thiết kế Dashboard thống kê cho Admin/Manager, bao gồm đơn hàng, doanh thu, trạng thái đơn và món được gọi nhiều nhất. | 06/08/2026   | 06/08/2026    | -                   |
+| 5    | - Nghiên cứu và lựa chọn dịch vụ AWS <br> + Nghiên cứu vai trò của Amazon S3 và CloudFront trong triển khai Frontend. <br> + Tìm hiểu API Gateway, AWS Lambda và DynamoDB cho Backend Serverless. <br> + Tìm hiểu AWS IAM để quản lý quyền truy cập và bảo mật hệ thống. | 07/08/2026   | 07/08/2026    | -   |
 
 ---
 
 ### Thành tựu Tuần 7
 
-- Hoàn thiện việc tích hợp các thành phần chính của hệ thống CloudMenu.
-- Triển khai frontend lên Amazon S3 và phân phối website thông qua Amazon CloudFront.
-- Kết nối thành công frontend với Amazon API Gateway, AWS Lambda và Amazon DynamoDB.
-- Kiểm tra và xử lý các vấn đề liên quan đến CORS và kết nối giữa frontend với backend.
-- Kiểm thử thành công chức năng nhận diện bàn thông qua QR Code và tham số URL.
-- Hoàn thiện luồng xử lý đơn hàng từ khách hàng gửi đơn đến bếp tiếp nhận, chế biến và hoàn thành.
+- Xác định được các chức năng chính cho Khách hàng, Nhân viên bếp và Admin/Manager.
+- Thiết kế được quy trình Menu, Cart, Order và cập nhật trạng thái đơn hàng.
+- Xây dựng được kiến trúc tổng quan Serverless với S3, CloudFront, API Gateway, Lambda và DynamoDB.
+- Hiểu được vai trò của IAM trong việc quản lý quyền truy cập và bảo mật hệ thống.

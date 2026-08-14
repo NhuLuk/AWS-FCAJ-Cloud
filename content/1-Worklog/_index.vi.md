@@ -1,84 +1,61 @@
 ---
 title: "Nhật ký công việc"
-date: 2026-06-22
+date: 2026-03-10
 weight: 1
 chapter: false
 pre: " <b> 1. </b> "
 ---
 
-Trong quá trình tham gia chương trình **First Cloud AI Journey**, em đã thực hiện worklog trong **8 tuần**, từ ngày **22/06/2026 đến 15/08/2026**. Nội dung worklog ghi lại quá trình tìm hiểu các dịch vụ AWS, xây dựng kiến thức về kiến trúc Serverless và từng bước áp dụng vào việc phát triển hệ thống **CloudMenu**.
+**Tuần 1 (22/06 - 26/06):** [Làm quen với AWS và các dịch vụ cơ bản](1.1-week1/)
 
----
+- Làm quen với môi trường làm việc, văn hóa doanh nghiệp và quy định tại Công ty TNHH Amazon Web Services Việt Nam.
+- Tìm hiểu các nhóm dịch vụ chủ chốt: Compute, Storage, Networking, Database.
+- Thiết lập và kiểm tra các tài khoản, công cụ, môi trường làm việc cần thiết theo hướng dẫn.
+- Xây dựng kiến thức và kỹ năng thao tác cơ bản với Amazon EC2.
 
-**Tuần 1 (22/06 - 26/06):** [AWS Cloud và Serverless cơ bản](1.1-week1/)
+**Tuần 2 (29/06 - 03/07):** [AWS IAM, triển khai EC2, mạng VPC và các khái niệm cơ bản](1.2-week2/)
 
-- Làm quen với nền tảng AWS Cloud và các nhóm dịch vụ cơ bản
-- Tìm hiểu kiến trúc Serverless và các thành phần của một ứng dụng web
-- Tìm hiểu tổng quan Amazon S3, CloudFront, API Gateway, Lambda, DynamoDB và IAM
-- Xây dựng kiến thức nền tảng để chuẩn bị phát triển hệ thống CloudMenu
+- Nắm vững kiến thức cơ bản về **AWS IAM, EC2** và **VPC**.
+- Triển khai, kết nối và quản lý **EC2 Instance** đồng thời hiểu các thành phần mạng VPC cơ bản.
+- Hiểu cơ chế kết nối **AWS Site-to-Site VPN** giữa mạng on-premises và VPC.
+- Củng cố kỹ năng **Python** và khả năng thực hành với các dịch vụ AWS.
 
----
+**Tuần 3 (06/07 - 10/07):** [High Availability, Scalability, RDS, Aurora, ElastiCache, Route 53](1.3-week3/)
 
-**Tuần 2 (29/06 - 03/07):** [IAM, Amazon S3 và Amazon CloudFront](1.2-week2/)
+- Nắm vững các khái niệm **High Availability** và **Scalability** trên AWS.
+- Tìm hiểu các dịch vụ **RDS, Aurora và ElastiCache**.
+- Thực hành cấu hình **Route 53** cho DNS và định tuyến lưu lượng.
+- Nghiên cứu và thực hành thiết kế các **AWS Architecture Patterns**.
 
-- Tìm hiểu AWS IAM và các nguyên tắc quản lý quyền truy cập
-- Tìm hiểu Amazon S3 và cách lưu trữ các tài nguyên của frontend
-- Tìm hiểu Amazon CloudFront và cơ chế phân phối nội dung qua HTTPS
-- Thực hành triển khai website tĩnh với Amazon S3 và CloudFront
+**Tuần 4 (13/07 - 17/07):** [Lưu trữ Amazon S3, CloudFront và các dịch vụ tích hợp](1.4-week4/)
 
----
+- Tìm hiểu và tối ưu lưu trữ trên **Amazon S3**.
+- Nâng cao kỹ năng quản lý, bảo mật và tối ưu hiệu suất S3.
+- Tìm hiểu **CloudFront**, **Global Accelerator** và các phương pháp giảm độ trễ phân phối nội dung.
+- Nghiên cứu **FSx**, **Storage Gateway** và tích hợp hệ thống qua **SQS**, **SNS**, **Step Functions**.
 
-**Tuần 3 (06/07 - 10/07):** [Amazon DynamoDB và thiết kế dữ liệu](1.3-week3/)
+**Tuần 5 (20/07 - 24/07):** [Containers trên AWS, kiến trúc Serverless và Database](1.5-week5/)
 
-- Tìm hiểu cơ sở dữ liệu NoSQL và dịch vụ Amazon DynamoDB
-- Làm quen với Table, Item, Attribute và Partition Key
-- Thực hành tạo, đọc và cập nhật dữ liệu trên DynamoDB
-- Thiết kế cấu trúc dữ liệu đơn hàng cho hệ thống CloudMenu
+- Nắm vững kiến thức và thực hành triển khai Containers trên AWS với ECS, EKS và ECR.
+- Hiểu và xây dựng các ứng dụng Serverless sử dụng Lambda, API Gateway và các dịch vụ AWS liên quan.
+- Nắm được các mô hình Database trên AWS, bao gồm Relational, NoSQL, Analytics và Caching.
 
----
+**Tuần 6 (27/07 - 31/07):** [Data & Analytics, Machine Learning và Monitoring](1.6-week6/)
 
-**Tuần 4 (13/07 - 17/07):** [AWS Lambda và Serverless Backend](1.4-week4/)
+- Nâng cao kiến thức về AWS Identity and Access Management, đặc biệt là IAM Roles.
+- Hiểu và thực hành các cơ chế quản lý quyền truy cập nâng cao trên AWS.
+- Tổng hợp kiến thức và chuẩn bị nội dung cho báo cáo AWS Cloud Journey.
 
-- Tìm hiểu AWS Lambda và mô hình Function as a Service (FaaS)
-- Thực hành tạo, cấu hình và kiểm thử Lambda Function
-- Kết nối AWS Lambda với Amazon DynamoDB bằng Boto3
-- Xây dựng các Lambda Function xử lý tạo, lấy và cập nhật trạng thái đơn hàng
+**Tuần 7 (03/08 - 07/08):** [Bảo mật AWS, VPC và Disaster Recovery cho ứng dụng quản lý chi tiêu](1.7-week7/)
 
----
+- Phân tích và xác định các yêu cầu chức năng của hệ thống CloudMenu.
+- Thiết kế quy trình gọi món và quản lý đơn hàng cho các nhóm người dùng.
+- Nắm được kiến trúc Serverless và luồng xử lý giữa các thành phần hệ thống.
+- Tìm hiểu vai trò của các dịch vụ AWS được sử dụng trong CloudMenu.
 
-**Tuần 5 (20/07 - 24/07):** [Amazon API Gateway và REST API](1.5-week5/)
+**Tuần 8 (10/08 - 14/08):** [Kiến trúc hệ thống nâng cao và tối ưu AWS cho ứng dụng quản lý chi tiêu](1.8-week8/)
 
-- Tìm hiểu Amazon API Gateway, REST API và các phương thức HTTP
-- Xây dựng các API phục vụ quy trình xử lý đơn hàng của CloudMenu
-- Tích hợp Amazon API Gateway với AWS Lambda và Amazon DynamoDB
-- Cấu hình CORS và kết nối frontend với backend của hệ thống
-
----
-
-**Tuần 6 (27/07 - 31/07):** [Phân tích và xây dựng hệ thống CloudMenu](1.6-week6/)
-
-- Phân tích yêu cầu và xác định các chức năng chính của CloudMenu
-- Xây dựng cơ chế nhận diện bàn và gọi món thông qua QR Code
-- Xây dựng giao diện khách hàng với menu, giỏ hàng và chức năng gửi đơn
-- Xây dựng giao diện Kitchen để theo dõi và cập nhật trạng thái đơn hàng
-
----
-
-**Tuần 7 (03/08 - 07/08):** [Triển khai và tích hợp CloudMenu trên AWS](1.7-week7/)
-
-- Hoàn thiện các thành phần chính của hệ thống CloudMenu
-- Triển khai frontend lên Amazon S3 và phân phối qua Amazon CloudFront
-- Tích hợp frontend với API Gateway, Lambda và DynamoDB
-- Kiểm thử quy trình từ khách hàng gọi món đến bếp tiếp nhận và hoàn thành đơn
-
----
-
-**Tuần 8 (10/08 - 15/08):** [Hoàn thiện CloudMenu và tổng kết chương trình](1.8-week8/)
-
-- Xây dựng và hoàn thiện Dashboard thống kê của hệ thống
-- Hoàn thiện chức năng theo dõi thời gian và trạng thái đơn hàng
-- Kiểm thử, sửa lỗi và hoàn thiện toàn bộ hệ thống CloudMenu
-- Hoàn thiện các sơ đồ kiến trúc, luồng xử lý, README, Workshop và tài liệu báo cáo
-- Tổng kết kiến thức và kỹ năng đạt được trong chương trình First Cloud AI Journey
-
----
+- Nâng cao khả năng thiết kế **AWS Solutions Architecture** theo hướng production-ready.
+- Tìm hiểu cách tích hợp các dịch vụ AWS để xây dựng hệ thống **Serverless** linh hoạt và tự động.
+- Áp dụng **AWS Well-Architected Framework** để đánh giá và tối ưu kiến trúc CloudMenu.
+- Chuẩn bị kiến thức cho các giai đoạn **IaC, DevOps và CI/CD**.

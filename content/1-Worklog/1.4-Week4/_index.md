@@ -5,38 +5,32 @@ chapter: false
 pre: " <b> 1.4. </b> "
 ---
 
-### Week 4 Objectives
+### Week 4 Goals
 
-- Learn about AWS Lambda and backend processing using Serverless Architecture.
-- Understand the structure of Lambda Functions, Events, Handlers, and Responses.
-- Practice creating and testing Lambda Functions on AWS.
-- Learn how AWS IAM Roles grant Lambda permission to access Amazon DynamoDB.
-- Practice building basic backend functions for order processing in the CloudMenu system.
+- Learn about and optimize storage on **Amazon S3**.
+- Enhance skills in managing, securing, and optimizing S3 performance.
+- Learn about **CloudFront**, **Global Accelerator**, and methods for reducing content delivery latency.
+- Research **FSx**, **Storage Gateway**, and system integration via **SQS**, **SNS**, and **Step Functions**.
 
-**Duration:** 13/07/2026 - 17/07/2026
+**Time Period:** 13/07/2026 - 17/07/2026
 
 ---
 
-### Weekly Task Overview
+### Weekly Tasks Overview
 
-| Day | Activities | Start Date | End Date | References |
-| ---- | ---------- | ---------- | -------- | ---------- |
-| 1 | - Learn about **AWS Lambda** <br> + Understand the concept of Function as a Service (FaaS) <br> + Learn how Lambda works in Serverless Architecture <br> + Explore Runtime, Function, Event, and Handler | 13/07/2026 | 13/07/2026 | [https://aws.amazon.com/lambda/](https://aws.amazon.com/lambda/) |
-| 2 | - Practice using **AWS Lambda** <br> + Create a Lambda Function <br> + Use Python as the Runtime <br> + Learn the structure of `lambda_handler` <br> + Create Test Events and verify Function execution results | 14/07/2026 | 14/07/2026 | [https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) |
-| 3 | - Learn how Lambda accesses **Amazon DynamoDB** <br> + Use the AWS SDK for Python (**Boto3**) <br> + Perform read and write operations on DynamoDB from Lambda <br> + Verify stored data after Lambda execution | 15/07/2026 | 15/07/2026 | [https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.html](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.html) |
-| 4 | - Learn about **AWS IAM Roles** for Lambda <br> + Understand Execution Roles and IAM Policies <br> + Grant the required permissions for Lambda to access DynamoDB <br> + Verify access between Lambda and the `CloudMenuOrders` table | 16/07/2026 | 16/07/2026 | [https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html) |
-| 5 | - Build Lambda Functions for **CloudMenu** <br> + Build `createOrder` to create orders <br> + Build `getOrders` to retrieve order data <br> + Build `updateOrderStatus` to update order status <br> + Test read and write operations with the `CloudMenuOrders` table | 17/07/2026 | 17/07/2026 | [https://docs.aws.amazon.com/lambda/latest/dg/](https://docs.aws.amazon.com/lambda/latest/dg/) |
+| Day | Activity                                                                                                                                                                                                                                                         | Start Date | End Date   | Reference                                  |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | ------------------------------------------ |
+| 1 | - Learn the fundamentals of Amazon S3. <br> + Practice creating S3 Buckets. <br> + Learn about and compare Storage Classes: Standard, Infrequent Access, and Glacier. | 13/07/2026 | 13/07/2026 | <https://000024.awsstudygroup.com/> |
+| 2 | - Advance my Amazon S3 management skills. <br> + Configure Cross-Region Replication (CRR) between two AWS Regions. <br> + Enable Versioning and test data recovery capabilities. | 14/07/2026 | 14/07/2026 | <https://000024.awsstudygroup.com/> |
+| 3 | - Explore and practice using Amazon CloudFront and AWS Global Accelerator. <br> + Set up a CloudFront Distribution to deliver content from Amazon S3. <br> + Explore and integrate Global Accelerator to optimize global access latency. | 15/07/2026 | 15/07/2026 | <https://000057.awsstudygroup.com/> |
+| 4 | - Learn about Amazon S3 data security. <br> + Apply IAM Policies and Bucket Policies to control access. <br> + Review and configure Block Public Access to protect data. | 16/07/2026 | 16/07/2026 | <https://000057.awsstudygroup.com/> |
+| 5 | - Explore advanced AWS Storage solutions. <br> + Learn about AWS Storage Gateway and Hybrid Storage. <br> + Compare the performance and characteristics of different storage solutions. | 17/07/2026 | 17/07/2026 | <https://www.youtube.com/watch?v=_yunukwcAwc> |
 
 ---
 
 ### Week 4 Achievements
 
-- Understood the role of AWS Lambda in building a backend using Serverless Architecture.
-- Learned the fundamental components of a Lambda Function, including Runtime, Event, Handler, and Response.
-- Practiced creating, configuring, and testing Lambda Functions on AWS.
-- Understood how Boto3 can be used by Lambda to read and write data in Amazon DynamoDB.
-- Understood the role of IAM Execution Roles and Policies in granting Lambda access to DynamoDB.
-- Built the `createOrder`, `getOrders`, and `updateOrderStatus` Lambda Functions for CloudMenu order processing.
-- Prepared the backend for integration with Amazon API Gateway in the following weeks.
-
----
+- Gain a solid understanding of Amazon S3, including Storage Classes, costs, performance, and durability.
+- Practice advanced S3 features, including CRR, Lifecycle Policies, and Versioning.
+- Strengthen knowledge of S3 Security using IAM, Bucket Policies, SSE/KMS, and Block Public Access.
+- Configure and evaluate CloudFront and Global Accelerator.
