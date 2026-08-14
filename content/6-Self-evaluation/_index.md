@@ -25,15 +25,28 @@ The main AWS services used in the project include:
 
 ### Tasks Performed
 
-During the development of the CloudMenu project, I participated in the following tasks:
+During the CloudMenu project, I participated in the following tasks:
 
-* Researched AWS services, Serverless architecture, and analyzed the requirements of the CloudMenu system.
-* Researched Amazon DynamoDB, designed the order data structure, and created the `CloudMenuOrders` table with `orderId` as the Partition Key.
-* Researched AWS Lambda and developed the `createOrder`, `getOrders`, and `updateOrderStatus` functions for order processing.
-* Connected AWS Lambda to Amazon DynamoDB using the AWS SDK for Python (`boto3`) and configured the required IAM Execution Role permissions.
-* Built an HTTP API using Amazon API Gateway, created the `POST /order`, `GET /orders`, and `PUT /orders/{orderId}` routes, integrated them with Lambda, and tested the APIs.
-* Deployed the frontend using Amazon S3 and Amazon CloudFront; developed and tested the Customer and Kitchen interfaces and the order tracking functionality.
-* Created the Worklog, Proposal, Workshop, architecture diagrams, processing flow diagrams, and other project-related documentation.
+- Learned about AWS services and the Serverless architecture model.
+- Analyzed requirements and identified the main features of the CloudMenu system.
+- Learned about Amazon DynamoDB and designed the order data structure.
+- Created the `CloudMenuOrders` table and used `orderId` as the Partition Key.
+- Learned about AWS Lambda and developed Lambda Functions for order processing.
+- Developed the `createOrder` Function to create new orders.
+- Developed the `getOrders` Function to retrieve the list of orders.
+- Developed the `updateOrderStatus` Function to update order status.
+- Connected AWS Lambda to Amazon DynamoDB using the AWS SDK for Python (`boto3`).
+- Configured IAM Execution Roles and the required permissions for Lambda to access DynamoDB and write logs.
+- Built an HTTP API using Amazon API Gateway.
+- Created the `POST /order`, `GET /orders`, and `PUT /orders/{orderId}` routes.
+- Integrated API Gateway routes with the corresponding Lambda Functions.
+- Tested the APIs and resolved issues that occurred during the integration process.
+- Deployed the CloudMenu frontend to Amazon S3.
+- Used Amazon CloudFront to distribute the frontend to users.
+- Built and tested the Customer Interface for viewing the menu and placing orders.
+- Built and tested the Kitchen Interface for monitoring and updating order status.
+- Developed the order tracking feature for customers.
+- Prepared the Worklog, Proposal, Workshop, architecture diagrams, processing flow diagrams, and other project-related documentation.
 
 Through the CloudMenu project, I gained a better understanding of how AWS services can be integrated to build a complete Serverless application. I also gained more experience in deploying and integrating frontend, API, backend, and database components in an AWS environment.
 
