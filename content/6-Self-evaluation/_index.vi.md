@@ -27,26 +27,14 @@ Các dịch vụ AWS chính được sử dụng trong dự án gồm:
 
 Trong quá trình thực hiện dự án CloudMenu, tôi đã tham gia các công việc sau:
 
-- Tìm hiểu các dịch vụ AWS và mô hình kiến trúc Serverless.
-- Phân tích yêu cầu và xác định các chức năng chính của hệ thống CloudMenu.
-- Tìm hiểu Amazon DynamoDB và thiết kế cấu trúc dữ liệu đơn hàng.
-- Tạo bảng `CloudMenuOrders` và sử dụng `orderId` làm Partition Key.
-- Tìm hiểu AWS Lambda và xây dựng các Lambda Function phục vụ xử lý đơn hàng.
-- Xây dựng Function `createOrder` để tạo đơn hàng mới.
-- Xây dựng Function `getOrders` để lấy danh sách đơn hàng.
-- Xây dựng Function `updateOrderStatus` để cập nhật trạng thái đơn hàng.
-- Kết nối AWS Lambda với Amazon DynamoDB bằng AWS SDK for Python (`boto3`).
-- Cấu hình IAM Execution Role và các quyền cần thiết để Lambda truy cập DynamoDB và ghi log.
-- Xây dựng HTTP API bằng Amazon API Gateway.
-- Tạo các Route `POST /order`, `GET /orders` và `PUT /orders/{orderId}`.
-- Tích hợp các Route của API Gateway với Lambda Function tương ứng.
-- Kiểm thử API và xử lý các lỗi phát sinh trong quá trình tích hợp.
-- Triển khai frontend của CloudMenu lên Amazon S3.
-- Sử dụng Amazon CloudFront để phân phối frontend đến người dùng.
-- Xây dựng và kiểm thử giao diện Customer để xem menu và đặt món.
-- Xây dựng và kiểm thử giao diện Kitchen để theo dõi và cập nhật trạng thái đơn hàng.
-- Xây dựng chức năng theo dõi trạng thái đơn hàng cho khách hàng.
-- Xây dựng Worklog, Proposal, Workshop, sơ đồ kiến trúc, sơ đồ luồng xử lý và các tài liệu báo cáo liên quan đến dự án.
+* Tìm hiểu các dịch vụ AWS, mô hình kiến trúc Serverless và phân tích yêu cầu của hệ thống CloudMenu.
+* Tìm hiểu Amazon DynamoDB, thiết kế cấu trúc dữ liệu đơn hàng và tạo bảng `CloudMenuOrders` với `orderId` làm Partition Key.
+* Tìm hiểu AWS Lambda và xây dựng các Function `createOrder`, `getOrders`, `updateOrderStatus` để xử lý đơn hàng.
+* Kết nối AWS Lambda với Amazon DynamoDB bằng AWS SDK for Python (`boto3`) và cấu hình IAM Execution Role với các quyền cần thiết.
+* Xây dựng HTTP API bằng Amazon API Gateway, tạo các Route `POST /order`, `GET /orders`, `PUT /orders/{orderId}`, tích hợp với Lambda và kiểm thử API.
+* Triển khai frontend trên Amazon S3 và Amazon CloudFront; xây dựng, kiểm thử giao diện Customer, Kitchen và chức năng theo dõi trạng thái đơn hàng.
+* Xây dựng Worklog, Proposal, Workshop, sơ đồ kiến trúc, sơ đồ luồng xử lý và các tài liệu báo cáo liên quan đến dự án.
+
 
 Thông qua quá trình thực hiện CloudMenu, tôi hiểu rõ hơn cách các dịch vụ AWS có thể được kết hợp để xây dựng một ứng dụng Serverless hoàn chỉnh. Tôi cũng có thêm kinh nghiệm trong việc triển khai và tích hợp các thành phần frontend, API, backend và cơ sở dữ liệu trên môi trường AWS.
 
